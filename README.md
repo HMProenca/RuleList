@@ -24,25 +24,26 @@ You can pip install this package:
 
 ```python
 import pandas as pd
-from rulelists import RuleList
+from rulelist.rulelist import RuleList
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
 task = 'prediction'
-target_type = 'categorical'
+target_model = 'categorical'
 
 data = datasets.load_breast_cancer()
-target = pd.Series(data.target)
-data = pd.DataFrame(data.data)
+Y = pd.Series(data.target)
+X = pd.DataFrame(data.data)
 
-X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size = 0.3)
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3)
 
-model = RuleList(task = task, target_type = target_type)
+model = RuleList(task = task, target_model = target_model)
 
 model.fit(X_train, y_train)
 
-y_hat = model.predict(X_test)
-
+y_pred = model.predict(X_test)
+from sklearn.metrics import accuracy_score
+accuracy_score(y_test.values,y_pred)
 ```
 
 

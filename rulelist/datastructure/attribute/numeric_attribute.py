@@ -128,21 +128,21 @@ class NumericAttribute(Attribute):
         for iq, value_quantile1 in enumerate(value_quantiles):  # makes binary intervals x<val and x >=val
             # condition x<val
             index_down = np.where(self.values < value_quantile1)[0]
-            description_down = self.name + " < " + str(value_quantile1)
+            description_down = str(self.name) + " < " + str(value_quantile1)
             self.items.append(create_item(index_down,variable_name= self.name, min_val=np.NINF, max_val=value_quantile1,
                                           description = description_down,number_operations=1))
             self.cardinality_operator[1] += 1
             if self.n_cutpoints == 1: break # if there is only one unique value we only need one item
             # condition x >=val
             index_up = np.where(self.values >= value_quantile1)[0]
-            description_up = self.name + " >= " + str(value_quantile1)
+            description_up = str(self.name) + " >= " + str(value_quantile1)
             self.items.append(create_item(index_up,variable_name= self.name, min_val=value_quantile1, max_val=np.inf,
                                           description = description_up,number_operations=1))
             self.cardinality_operator[1] += 1
             # conditions val1 <= x < val2
             for value_quantile2 in value_quantiles[iq + 1:]:
                 index_interval = np.where((self.values >= value_quantile1) & (self.values < value_quantile2))[0]
-                description_interval = str(value_quantile1) + " <= " + self.name + " < " + str(value_quantile2)
+                description_interval = str(value_quantile1) + " <= " + str(self.name) + " < " + str(value_quantile2)
                 self.items.append(create_item(index_interval,variable_name= self.name, min_val=value_quantile1,
                                               max_val=value_quantile2,description = description_interval,
                                               number_operations=2))

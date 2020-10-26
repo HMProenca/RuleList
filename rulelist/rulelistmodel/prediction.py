@@ -15,9 +15,11 @@ point_value_estimation = {
 def predict_rulelist(X : pd.DataFrame, rulelist: RuleSetModel):
     if X is not pd.DataFrame: Exception('X needs to be a DataFrame')
     n_predictions = X.shape[0]
-    n_targets = rulelist.defaultrule_statistics.number_targets
+    n_targets = rulelist.default_rule_statistics.number_targets
     instances_covered = np.zeros(n_predictions, dtype=bool)
     predictions = np.empty((n_predictions,n_targets),dtype=object)
+    # TODO: add probability estimate if the user wants
+    probability = np.empty((n_predictions,n_targets),dtype=float)
     for subgroup in rulelist.subgroups:
         instances_subgroup = ~instances_covered &\
                              reduce(lambda x,y: x & y, [item.activation_function(X).values for item in subgroup.pattern])
@@ -25,7 +27,13 @@ def predict_rulelist(X : pd.DataFrame, rulelist: RuleSetModel):
         instances_covered |= instances_subgroup
 
     # default rule
-    predictions[~instances_covered, :] = point_value_estimation[rulelist.target_model](rulelist.defaultrule_statistics)
+    predictions[~instances_covered, :] = point_value_estimation[rulelist.target_model](rulelist.default_rule_statistics)
     if n_targets == 1:
         predictions = predictions.flatten()
+
+    # if int values try to return ints
+    try:
+        predictions = predictions.astype(int)
+    except ValueError:
+        pass
     return predictions

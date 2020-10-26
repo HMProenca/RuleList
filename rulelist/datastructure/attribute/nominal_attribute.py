@@ -76,7 +76,7 @@ class NominalAttribute(Attribute):  # TODO: add sets of categories with OR logic
         for category in self.categories:
             vector_category = np.where(self.values == category)[0]
             bit_array = indexes2bitset(vector_category)
-            description = self.name + " = " + str(category)
+            description = str(self.name) + " = " + str(category)
             activation_function = partial(activation_nominal, attribute_name=self.name, category=category)
             self.items.append(Item(bit_array,self.name, description, number_operators,activation_function))
         return self.items, self.cardinality_operator
