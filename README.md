@@ -43,11 +43,6 @@ model.fit(X_train, y_train)
 
 y_hat = model.predict(X_test)
 
-from sklearn.metrics import accuracy_score, roc_auc_score, precision_score, recall_score, confusion_matrix
-
-test_preds = sgclassifier.predict(X_test)
-
-
 ```
 
 
@@ -55,7 +50,7 @@ test_preds = sgclassifier.predict(X_test)
 
 ## Contact
 
-If there are any questions or issues, please come to the [Gitter chatroom](https://gitter.im/pyModEA/configuring-cmaes) or open an issue here on Github.
+If there are any questions or issues, please contact me by mail at `hugo.manuel.proenca@gmail.com` or open an issue here on Github.
 
 
 ## Citation
