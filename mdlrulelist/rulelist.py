@@ -15,18 +15,21 @@ from mdlrulelist.search.iterative_rule_search import _fit_rulelist
 from mdlrulelist.util.bitset_operations import bitset2indexes
 
 
-class MDLRuleList():
-    """Subgroup list discovery for single-numeric targets with an MDL formulation.
-    It resorts to greedy and beam search to find the the subgroup list that
-    best fits the data
+class RuleList():
+    """Produces a rule list from data.
+
+    It can be applied for prediction or subgroup set discovery for univariate or multivariate, nominal or
+    numeric targets. It uses an Minimum Description Length (MDL) formulation to define an optimum rule list.
+    For search it resorts combination of greedy search to one rule at the time, together with beam search to
+    find the the rules to add.
     Parameters
     ----------
     target_type : string, mandatory
         (possible values: "single-numeric" or "nominal")
         choose the appropriate target_type (no default value) for the type of
         rule/subgroup search.
-    max_depth : int, optional (default=4)
-        defines the maximum size that subgroup description can take based
+    max_depth : int, optional (default=5)
+        defines the maximum size that rule/subgroup description can take based
         on the number of variables that the beam search accepts to refine.
         For example, if 'max_depth = 4' the maximum size of a pattern found is
         4.
@@ -37,7 +40,6 @@ class MDLRuleList():
         defines the minimum support that a rule/subgroup can cover in the training data.
         if positive int, it defines an absolute value
         if smaller than one float, it defines a relative value, i.e., min_support*number_instances_data
-    iterative_beam_width
     n_cutpoints : int, optional (default=5)
        number of cut points used to discretize a single-numeric attribute/variable.
        Note 1: this algorithm creates for each cutpoint a binary split, and
@@ -82,7 +84,7 @@ class MDLRuleList():
     """
 
     def __init__(self,target_model : Literal["gaussian", "categorical"], task : Literal["prediction", "discovery"],
-                 max_depth=5, beam_width = 100, min_support = 1, iterative_beam_width=1, n_cutpoints = 5, discretization = "static",
+                 max_depth=5, beam_width = 100, min_support = 1, n_cutpoints = 5, discretization = "static",
                  max_rules = 0, alpha_gain = 1.0):
 
         if target_model not in ["categorical", "gaussian"]:
@@ -121,7 +123,6 @@ class MDLRuleList():
         self.max_depth = max_depth
         self.beam_width = beam_width
         self.min_support = min_support
-        self.iterative_beam_width= iterative_beam_width
         self.n_cutpoints = n_cutpoints
         self.discretization = discretization
         self.task = task
@@ -150,8 +151,7 @@ class MDLRuleList():
 
         start_time = time()
         self._rulelist = _fit_rulelist(
-                X,Y, self.target_model, self.max_depth,self.beam_width,self.min_support,
-                self.iterative_beam_width, self.n_cutpoints,
+                X,Y, self.target_model, self.max_depth,self.beam_width,self.min_support, self.n_cutpoints,
                 self.task,self.discretization,self.max_rules,self.alpha_gain)
         self.runtime = time() - start_time
         self.number_rules = self._rulelist.number_rules

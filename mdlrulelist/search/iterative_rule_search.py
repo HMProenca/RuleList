@@ -14,7 +14,7 @@ rule_list_models = {
     "categorical":CategoricalRuleList
 }
 
-def _fit_rulelist(X, Y, target_model, max_depth, beam_width, min_support, iterative_beam_width,
+def _fit_rulelist(X, Y, target_model, max_depth, beam_width, min_support,
                   n_cutpoints, task, discretization, max_rules, alpha_gain):
     """ this function finds the rule/subgroup list given the selected data,
     target, target type using the Minimum Description Length (MDL) principle 
