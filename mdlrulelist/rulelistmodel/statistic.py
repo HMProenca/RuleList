@@ -2,7 +2,8 @@ from dataclasses import InitVar, dataclass, field
 
 from gmpy2 import popcount
 
-from mdlrulelist.data.data import Data
+from mdlrulelist.datastructure.data import Data
+
 
 @dataclass
 class Statistic:
@@ -11,7 +12,7 @@ class Statistic:
 
     Attributes
     ----------
-    data : InitVar[Data]
+    datastructure : InitVar[Data]
         The dataclass Data taht contains all the information regarding the dataset.
     values : InitVar[np.ndarray]
         The values on which to compute the statistics.

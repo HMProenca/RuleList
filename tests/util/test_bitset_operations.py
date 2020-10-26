@@ -1,6 +1,4 @@
-import pytest
 import numpy as np
-
 from gmpy2 import mpz
 
 from mdlrulelist.util.bitset_operations import indexes2bitset, bitset2indexes

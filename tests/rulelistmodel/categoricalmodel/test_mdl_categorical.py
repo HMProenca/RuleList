@@ -1,10 +1,11 @@
-import pytest
 import numpy as np
 import pandas as pd
+import pytest
 from gmpy2 import bit_mask
 
-from mdlrulelist.data.data import Data
-from mdlrulelist.rulelistmodel.categoricalmodel.mdl_categorical import categorical_free_encoding, categorical_fixed_encoding, \
+from mdlrulelist.datastructure.data import Data
+from mdlrulelist.rulelistmodel.categoricalmodel.mdl_categorical import categorical_free_encoding, \
+    categorical_fixed_encoding, \
     length_rule_free_categorical, length_rule_fixed_categorical
 from mdlrulelist.util.build.extra_maths import log2_0
 
@@ -13,33 +14,34 @@ from mdlrulelist.util.build.extra_maths import log2_0
 def constant_parameters():
     input_n_cutpoints = 5
     input_discretization = "static"
-    input_target_data = "single-nominal"
+    input_target_data = "categorical"
+    input_minsupp = 0
     dictinput = {"attribute1": np.arange(100),
                  "attribute2": np.array(["below50" if i < 50 else "above49" for i in range(100)])}
     input_input_data = pd.DataFrame(data=dictinput)
-    yield input_input_data, input_n_cutpoints, input_discretization, input_target_data
+    yield input_input_data, input_n_cutpoints, input_discretization, input_target_data,input_minsupp
 
 @pytest.fixture
 def generate_inputvalues_one_target(constant_parameters):
-    input_input_data, input_n_cutpoints, input_discretization, input_target_data = constant_parameters
+    input_input_data, input_n_cutpoints, input_discretization, input_target_data,input_minsupp = constant_parameters
     # targets
     dictoutput = {"target1": np.array(["below50" if i < 50 else "above49" for i in range(100)])}
     input_output_data = pd.DataFrame(data=dictoutput)
     data_class = Data(input_input_data, input_n_cutpoints, input_discretization,
-                       input_output_data, input_target_data)
+                       input_output_data, input_target_data,input_minsupp)
     input_bitarray_for_statistic = bit_mask(data_class.number_instances)
     yield data_class
 
 @pytest.fixture
 def generate_inputvalues_two_targets(constant_parameters):
-    input_input_data, input_n_cutpoints, input_discretization, input_target_data = constant_parameters
+    input_input_data, input_n_cutpoints, input_discretization, input_target_data,input_minsupp = constant_parameters
     # targets
     dictoutput = {"target1": np.array(["below50" if i < 50 else "above49" for i in range(100)]),
                   "target2": np.array(["below99" if i < 99 else "above99" for i in range(100)])}
 
     input_output_data = pd.DataFrame(data=dictoutput)
     data_class = Data(input_input_data, input_n_cutpoints, input_discretization,
-                       input_output_data, input_target_data)
+                       input_output_data, input_target_data,input_minsupp)
     yield data_class
 
 @pytest.fixture

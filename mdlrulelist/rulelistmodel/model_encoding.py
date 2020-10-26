@@ -1,4 +1,4 @@
-from mdlrulelist.data.attribute.attribute import Attribute
+from mdlrulelist.datastructure.attribute.attribute import Attribute
 from mdlrulelist.mdl.mdl_base_codes import universal_code_integers_maximum, uniform_code, universal_code_integers
 
 

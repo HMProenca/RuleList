@@ -1,12 +1,11 @@
 from dataclasses import dataclass, field
+from functools import partial
 from typing import List, Tuple, AnyStr, Iterator, Dict
 
 import numpy as np
-from functools import partial
-
 from pandas import DataFrame
 
-from mdlrulelist.data.attribute.attribute import Attribute, Item
+from mdlrulelist.datastructure.attribute.attribute import Attribute, Item
 from mdlrulelist.util.bitset_operations import indexes2bitset
 
 
@@ -65,7 +64,7 @@ def create_item(indexes, variable_name, min_val, max_val, description, number_op
     Parameters
     ----------
     indexes : np.ndarray
-        Array of indexes where the item is present in the training data.
+        Array of indexes where the item is present in the training datastructure.
     variable_name : str
         Name of the attribute/variable that this item is attached to.
     min_val : float

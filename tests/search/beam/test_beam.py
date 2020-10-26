@@ -1,6 +1,8 @@
-import pytest
 import numpy as np
+import pytest
+
 from mdlrulelist.search.beam.beam import Beam
+
 
 @pytest.fixture
 def start_beam():

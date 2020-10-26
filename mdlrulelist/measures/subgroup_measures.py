@@ -4,10 +4,11 @@ Created on Fri Nov 15 13:10:10 2019
 
 @author: gathu
 """
-import numpy as np
-from math import pi, exp, log, log2
 from itertools import combinations
-from gmpy2 import xmpz,mpz,popcount
+from math import exp, log2
+
+import numpy as np
+from gmpy2 import xmpz, mpz, popcount
 
 from mdlrulelist.mdl.mdl_base_codes import log2_0
 

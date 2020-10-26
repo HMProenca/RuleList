@@ -4,19 +4,18 @@ Created on Fri Oct 18 16:13:18 2019
 
 @author: gathu
 """
-from functools import reduce
 from time import time
 from typing import Literal
+
 import numpy as np
 
 from mdlrulelist.rulelistmodel.prediction import predict_rulelist
 from mdlrulelist.search.iterative_rule_search import _fit_rulelist
-
 from mdlrulelist.util.bitset_operations import bitset2indexes
 
 
 class RuleList():
-    """Produces a rule list from data.
+    """Produces a rule list from datastructure.
 
     It can be applied for prediction or subgroup set discovery for univariate or multivariate, nominal or
     numeric targets. It uses an Minimum Description Length (MDL) formulation to define an optimum rule list.
@@ -37,7 +36,7 @@ class RuleList():
         defines the width of the beam in the beam search, i.e., the number of
         patterns that are selected at each iteration to be expanded.
     min_support : int or float
-        defines the minimum support that a rule/subgroup can cover in the training data.
+        defines the minimum support that a rule/subgroup can cover in the training datastructure.
         if positive int, it defines an absolute value
         if smaller than one float, it defines a relative value, i.e., min_support*number_instances_data
     n_cutpoints : int, optional (default=5)
@@ -136,7 +135,7 @@ class RuleList():
         return text2print
 
     def fit(self,X,Y):
-        """Fit the model according to the given training data.
+        """Fit the model according to the given training datastructure.
         Parameters
         ----------
         df : pandas dataframe with name variables with last column as target
@@ -161,7 +160,7 @@ class RuleList():
 
 
     def predict(self,X):
-        """ Predict for new data what is it going to be the performance
+        """ Predict for new datastructure what is it going to be the performance
         if rule list not fit it does not work
         ----------
         X : a numpy array or pandas dataframe with the variables in the same

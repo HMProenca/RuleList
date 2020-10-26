@@ -1,6 +1,6 @@
-import pytest
 import numpy as np
 import pandas as pd
+import pytest
 from gmpy2 import bit_mask
 
 from mdlrulelist.rulelistmodel.categoricalmodel.categoricaltarget import CategoricalTarget

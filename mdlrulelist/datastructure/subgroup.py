@@ -1,11 +1,11 @@
-from dataclasses import field, dataclass
+from copy import deepcopy
 from functools import reduce
-from typing import List, AnyStr, NamedTuple
+from typing import List
+
 import numpy as np
 from gmpy2 import mpz, popcount
-from copy import deepcopy
 
-from mdlrulelist.data.attribute.attribute import Item
+from mdlrulelist.datastructure.attribute.attribute import Item
 
 
 class Subgroup():
@@ -19,7 +19,7 @@ class Subgroup():
     statistic : List[Any]
         List of the statistics for each target value.
     delta_data : float
-        The local improvement in the data encoding of adding this subgroup to the rule list.
+        The local improvement in the datastructure encoding of adding this subgroup to the rule list.
     delta_model : float
         The local improvement (always negative) in the model encoding of adding this subgroup to the rule list.
     score : float

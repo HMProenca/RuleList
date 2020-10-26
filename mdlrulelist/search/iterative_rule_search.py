@@ -4,7 +4,7 @@ Created on Fri Nov  8 13:52:14 2019
 
 @author: gathu
 """
-from mdlrulelist.data.data import Data
+from mdlrulelist.datastructure.data import Data
 from mdlrulelist.rulelistmodel.categoricalmodel.categoricalrulelist import CategoricalRuleList
 from mdlrulelist.rulelistmodel.gaussianmodel.gaussianrulelist import GaussianRuleList
 from mdlrulelist.search.beam.itemset_beamsearch import find_best_rule
@@ -16,11 +16,11 @@ rule_list_models = {
 
 def _fit_rulelist(X, Y, target_model, max_depth, beam_width, min_support,
                   n_cutpoints, task, discretization, max_rules, alpha_gain):
-    """ this function finds the rule/subgroup list given the selected data,
+    """ this function finds the rule/subgroup list given the selected datastructure,
     target, target type using the Minimum Description Length (MDL) principle 
     formulation.
     """
-    # initialize the data in the needed format for the analysis
+    # initialize the datastructure in the needed format for the analysis
     data = Data(input_data=X,n_cutpoints=n_cutpoints,discretization=discretization,
                 target_data=Y,target_model=target_model, min_support = min_support)
     rulelist = rule_list_models[data.target_model](data, task, max_depth, beam_width,min_support, max_rules, alpha_gain)

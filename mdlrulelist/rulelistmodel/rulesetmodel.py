@@ -1,13 +1,9 @@
 from copy import deepcopy
-from math import log
 
-from gmpy2 import mpz, bit_mask, popcount, xmpz
-import numpy as np
-from scipy.special.cython_special import gammaln
+from gmpy2 import mpz, bit_mask, popcount
 
-from mdlrulelist.mdl.mdl_base_codes import universal_code_integers, uniform_combination_code
+from mdlrulelist.mdl.mdl_base_codes import uniform_combination_code
 from mdlrulelist.rulelistmodel.data_encoding import compute_length_data
-from mdlrulelist.rulelistmodel.gain_add_rule import compute_delta_data, compute_delta_model, compute_statistics_newrules
 from mdlrulelist.rulelistmodel.model_encoding import compute_item_length, compute_length_model
 from mdlrulelist.rulelistmodel.statistic import Statistic
 

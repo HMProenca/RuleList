@@ -1,7 +1,3 @@
-from functools import reduce
-from typing import Dict
-from operator import add
-
 from mdlrulelist.mdl.mdl_base_codes import log_multinomial
 from mdlrulelist.rulelistmodel.categoricalmodel.categoricalstatistic import CategoricalFreeStatistic,CategoricalFixedStatistic
 from mdlrulelist.util.build.extra_maths import log2_0

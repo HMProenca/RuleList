@@ -1,10 +1,9 @@
-import pytest
-import pandas as pd
 import numpy as np
+import pandas as pd
+import pytest
 
-from mdlrulelist.data.attribute import NumericAttribute, NominalAttribute
-from mdlrulelist.data.data import Data
-from mdlrulelist.data.subgroup import Subgroup
+from mdlrulelist.datastructure.data import Data
+from mdlrulelist.datastructure.subgroup import Subgroup
 from mdlrulelist.rulelistmodel.gaussianmodel.gaussianrulelist import GaussianRuleList
 from mdlrulelist.search.beam.beam import Beam
 from mdlrulelist.search.beam.itemset_beamsearch import refine_subgroup, find_best_rule
@@ -15,12 +14,12 @@ def constant_parameters():
     input_n_cutpoints = 5
     input_discretization = "static"
     input_target_data = "gaussian"
-
-    yield input_n_cutpoints, input_discretization, input_target_data
+    input_minsupp = 0
+    yield input_n_cutpoints, input_discretization, input_target_data, input_minsupp
 
 @pytest.fixture
 def generate_input_dataframe_two_target_normal(constant_parameters):
-    input_n_cutpoints, input_discretization, input_target_data = constant_parameters
+    input_n_cutpoints, input_discretization, input_target_data,input_minsupp = constant_parameters
     dictinput = {"attribute1": np.arange(100000),
                  "attribute2": np.array(["below1000" if i < 1000 else "above999" for i in range(100000)])}
     input_input_data = pd.DataFrame(data=dictinput)
@@ -30,7 +29,7 @@ def generate_input_dataframe_two_target_normal(constant_parameters):
                                              np.random.normal(loc=50,scale=5,size=83334)), axis=None)}
     input_output_data = pd.DataFrame(data=dictoutput)
     data = Data(input_input_data, input_n_cutpoints, input_discretization,
-                       input_output_data, input_target_data)
+                       input_output_data, input_target_data,input_minsupp)
     yield data
 
 
@@ -49,8 +48,9 @@ def make_rulelist(generate_input_dataframe_two_target_normal):
     input_beam_width = 10
     input_max_rules = 10
     input_alpha_gain = 1
-    input_ruleset = GaussianRuleList(data, input_task, input_max_depth, input_beam_width, input_max_rules,
-                                      input_alpha_gain)
+    input_minsupp = 0
+    input_ruleset = GaussianRuleList(data, input_task, input_max_depth, input_beam_width,input_minsupp,
+                                     input_max_rules,input_alpha_gain)
     yield input_ruleset
 
 

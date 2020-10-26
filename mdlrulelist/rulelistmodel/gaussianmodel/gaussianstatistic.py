@@ -2,10 +2,9 @@ from dataclasses import dataclass, field, InitVar
 from typing import List
 
 import numpy as np
+from numba import jit
 
-from numba import jit, guvectorize, float64, int64
-
-from mdlrulelist.data.data import Data
+from mdlrulelist.datastructure.data import Data
 from mdlrulelist.rulelistmodel.statistic import Statistic
 from mdlrulelist.util.bitset_operations import bitset2indexes
 
@@ -55,7 +54,7 @@ class GaussianFixedStatistic(Statistic):
 
     Attributes
     ----------
-    data : InitVar[Data]
+    datastructure : InitVar[Data]
         The dataclass Data that contains all the information regarding the dataset.
     values : InitVar[np.ndarray]
         The values on which to compute the statistics.
@@ -76,7 +75,7 @@ class GaussianFixedStatistic(Statistic):
         Computes the statistics of the Gaussian  necessary to compute the encoding. given the fixed values of the mean
         and variance for each target.
     """
-    #data : InitVar[Data]
+    #datastructure : InitVar[Data]
     #bitarray_subgroup : InitVar[list]
     #usage : int = field(default=0,init=False)
     mean : np.ndarray = field(init=False)
@@ -96,8 +95,8 @@ class GaussianFixedStatistic(Statistic):
             column_values = data.targets_info.array_data[indices_subgroup,0]
             self.rss[0] = compute_RSS(column_values, self.mean)
 
-            #mean = compute_mean_special(data.target_data_test, indices_subgroup, index_column)
-            #self.rss[0]  = compute_RSS_special(data.target_data_test[:,0], indices_subgroup, self.mean)
+            #mean = compute_mean_special(datastructure.target_data_test, indices_subgroup, index_column)
+            #self.rss[0]  = compute_RSS_special(datastructure.target_data_test[:,0], indices_subgroup, self.mean)
         elif data.number_targets > 1:
             target_values = data.targets_info.array_data[indices_subgroup,:]
             for icol, column_values in enumerate(target_values.T):
@@ -113,7 +112,7 @@ class GaussianFreeStatistic(Statistic):
 
     Attributes
     ----------
-    data : InitVar[Data]
+    datastructure : InitVar[Data]
         The dataclass Data taht contains all the information regarding the dataset.
     values : InitVar[np.ndarray]
         The values on which to compute the statistics.
@@ -148,7 +147,7 @@ class GaussianFreeStatistic(Statistic):
         Computes the statistics of the Gaussian  necessary to compute the encoding. given the values assuming that the
          value of the statistics are unkown (not fixed).
     """
-    #data : InitVar[Data]
+    #datastructure : InitVar[Data]
     #bitarray_subgroup : InitVar[list]
     #usage : int = field(init=False)
     mean : np.ndarray = field(init=False)
@@ -186,8 +185,8 @@ class GaussianFreeStatistic(Statistic):
         return self
 
     def _compute_statistic_free(self, data, index_column, column_values):
-        #column_values = data.target_data_test[indices_subgroup, index_column]
-        #column_values = data.targets_info.array_data[indices_subgroup, index_column]
+        #column_values = datastructure.target_data_test[indices_subgroup, index_column]
+        #column_values = datastructure.targets_info.array_data[indices_subgroup, index_column]
         mean = compute_mean(column_values)
         rss = compute_RSS(column_values, mean)
         self.mean[index_column] = mean

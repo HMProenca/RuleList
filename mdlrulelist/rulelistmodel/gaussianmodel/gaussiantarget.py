@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field, InitVar
-from typing import NamedTuple, List
 
-import pandas as pd
 import numpy as np
-from gmpy2 import mpz,bit_mask
+import pandas as pd
+from gmpy2 import mpz, bit_mask
+
 
 @dataclass
 class GaussianTargets:

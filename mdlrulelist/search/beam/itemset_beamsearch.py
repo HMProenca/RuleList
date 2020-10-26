@@ -7,11 +7,11 @@ Created on Fri Nov  8 16:09:11 2019
 from functools import reduce
 
 import numpy as np
-from gmpy2 import xmpz, popcount, bit_mask, mpz
+from gmpy2 import popcount, bit_mask
 
+from mdlrulelist.datastructure.subgroup import Subgroup
 from mdlrulelist.rulelistmodel.gain_add_rule import compute_delta_score, compute_statistics_newrules
 from mdlrulelist.search.beam.beam import Beam
-from mdlrulelist.data.subgroup import Subgroup
 
 
 def refine_subgroup(rulelist,data,candidate2refine,beam,subgroup2add):
@@ -43,7 +43,7 @@ def refine_subgroup(rulelist,data,candidate2refine,beam,subgroup2add):
     return beam, subgroup2add
 
 def find_best_rule(rulelist, data):
-    """ Finds the best rule using beam search given the rule list so far and the data.
+    """ Finds the best rule using beam search given the rule list so far and the datastructure.
     """
     subgroup2add = Subgroup()
     beam = Beam(rulelist.beam_width)
@@ -55,5 +55,5 @@ def find_best_rule(rulelist, data):
         beam = beam.clean()
         for candidate2refine in candidates:
             beam, subgroup2add = refine_subgroup(rulelist,data,candidate2refine,beam,subgroup2add)
-    print("Gain data: {} ; gain model : {} ; gain: {}".format(subgroup2add.delta_data,subgroup2add.delta_model,subgroup2add.score))
+    print("Gain datastructure: {} ; gain model : {} ; gain: {}".format(subgroup2add.delta_data,subgroup2add.delta_model,subgroup2add.score))
     return subgroup2add

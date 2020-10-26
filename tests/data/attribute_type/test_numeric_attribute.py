@@ -1,8 +1,9 @@
-import pytest
 import numpy as np
 import pandas as pd
+import pytest
 
-from mdlrulelist.data.attribute.numeric_attribute import activation_numeric, find_cutpoints, NumericAttribute, create_item
+from mdlrulelist.datastructure.attribute.numeric_attribute import activation_numeric, find_cutpoints, NumericAttribute, \
+    create_item
 
 
 class TestNumericAttribute(object):
@@ -12,12 +13,13 @@ class TestNumericAttribute(object):
         input_name = "column1"
         input_max_operators = 2
         input_n_cutpoints = 3
+        input_minsupp = 0
         input_discretization = "static"
         expected_number_items = 9 # 3 with <, 3 with >, and 3 with <>
         expected_cardinality_operator = {1: 6, 2: 3}
         expected_n_cutpoints = 3
 
-        output_attribute = NumericAttribute(input_name, test_dataframe[input_name], input_max_operators,
+        output_attribute = NumericAttribute(input_name, test_dataframe[input_name], input_max_operators,input_minsupp,
                                             input_n_cutpoints, input_discretization)
         actual_number_items= len(output_attribute.items)
         actual_cardinality_operator = output_attribute.cardinality_operator
@@ -36,11 +38,13 @@ class TestNumericAttribute(object):
         input_max_operators = 2
         input_n_cutpoints = 5
         input_discretization = "static"
+        input_minsupp = 0
+
         expected_number_items = 1  # 3 with <, 3 with >, and 3 with <>
         expected_cardinality_operator = {1:1, 2: 0}
         expected_n_cutpoints = 1
 
-        output_attribute = NumericAttribute(input_name, test_dataframe[input_name], input_max_operators,
+        output_attribute = NumericAttribute(input_name, test_dataframe[input_name], input_max_operators,input_minsupp,
                                             input_n_cutpoints, input_discretization)
         actual_number_items = len(output_attribute.items)
         actual_cardinality_operator = output_attribute.cardinality_operator

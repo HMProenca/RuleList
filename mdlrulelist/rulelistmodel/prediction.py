@@ -1,9 +1,11 @@
+from functools import reduce
+
+import numpy as np
+import pandas as pd
+
 from mdlrulelist.rulelistmodel.categoricalmodel.prediction_categorical import point_value_categorical
 from mdlrulelist.rulelistmodel.gaussianmodel.prediction_gaussian import point_value_gaussian
 from mdlrulelist.rulelistmodel.rulesetmodel import RuleSetModel
-import pandas as pd
-import numpy as np
-from functools import reduce
 
 point_value_estimation = {
     "gaussian" : point_value_gaussian,

@@ -1,11 +1,11 @@
-from collections import OrderedDict,defaultdict
 from dataclasses import dataclass, field
 from typing import Dict, Any
 
 from gmpy2 import popcount
 
-from mdlrulelist.data.data import Data
+from mdlrulelist.datastructure.data import Data
 from mdlrulelist.rulelistmodel.statistic import Statistic
+
 
 @dataclass(repr=True, eq=False, order=False, unsafe_hash=True, frozen=False)
 class CategoricalFixedStatistic(Statistic):

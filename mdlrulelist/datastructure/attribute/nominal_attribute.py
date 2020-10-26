@@ -1,12 +1,13 @@
 from dataclasses import field, dataclass
+from functools import partial
 from typing import List, Tuple, Any, AnyStr, Dict
+
 import numpy as np
 import pandas as pd
 
-from functools import partial
-
-from mdlrulelist.data.attribute.attribute import Item, Attribute
+from mdlrulelist.datastructure.attribute.attribute import Item, Attribute
 from mdlrulelist.util.bitset_operations import indexes2bitset
+
 
 def activation_nominal(df: pd.DataFrame, attribute_name: AnyStr, category: Any) -> pd.DataFrame:
     """Checks in which instances the numerical conditions are True.

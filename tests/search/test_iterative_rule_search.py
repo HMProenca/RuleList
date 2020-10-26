@@ -1,8 +1,7 @@
-import pytest
-import pandas as pd
 import numpy as np
+import pandas as pd
+import pytest
 
-from mdlrulelist.data.data import Data
 from mdlrulelist.search.iterative_rule_search import _fit_rulelist
 
 

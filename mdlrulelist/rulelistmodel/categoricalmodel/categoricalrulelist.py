@@ -1,9 +1,3 @@
-from math import log2
-
-import numpy as np
-from gmpy2 import xmpz
-
-from mdlrulelist.mdl.mdl_base_codes import multinomial_with_recurrence
 from mdlrulelist.rulelistmodel.categoricalmodel.categoricalstatistic import CategoricalFreeStatistic, CategoricalFixedStatistic
 from mdlrulelist.rulelistmodel.categoricalmodel.mdl_categorical import length_rule_fixed_categorical, \
     length_rule_free_categorical
@@ -46,8 +40,8 @@ class CategoricalRuleList(RuleSetModel):
             RuleSetModel._create_constants(self,data,max_depth)
         # compute nml normalizing constant
         #self.log_nml_comp = {(n_points, n_classes): log2(multinomial_with_recurrence(n_classes,n_points))
-        #                     if n_points != 0 else 0 for n_points in range(0,data.number_instances+1)
-        #                     for n_classes in data.targets_info.number_classes.values()}
+        #                     if n_points != 0 else 0 for n_points in range(0,datastructure.number_instances+1)
+        #                     for n_classes in datastructure.targets_info.number_classes.values()}
         self.log_prior_class = {varname:
                                 {category: -log2_0(count/data.number_instances) for category,count in counts.items()}
                                 for varname, counts in data.targets_info.counts.items()}

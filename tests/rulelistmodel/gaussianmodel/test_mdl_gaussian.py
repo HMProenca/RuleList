@@ -1,10 +1,9 @@
-import pytest
+from math import log, pi, exp, log2
 
 import numpy as np
-from math import log, pi, exp, log2
+import pytest
 from scipy.special.cython_special import gammaln
 
-from mdlrulelist.rulelistmodel.gaussianmodel.gaussianstatistic import find2points
 from mdlrulelist.rulelistmodel.gaussianmodel.mdl_gaussian import gaussian_bayesian_encoding, gaussian_fixed_encoding, \
     length_rule_free_gaussian, length_rule_fixed_gaussian
 

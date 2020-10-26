@@ -1,5 +1,6 @@
-from gmpy2 import mpz, bit_set, xmpz
 import numpy as np
+from gmpy2 import mpz, xmpz
+
 
 def indexes2bitset(vector2transform: np.ndarray) -> mpz:
     """ Transforms a numpy vector of indexes into a bitset (gmpy2 multiple precision integer).

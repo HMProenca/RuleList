@@ -1,8 +1,6 @@
 from mdlrulelist.mdl.mdl_base_codes import universal_code_integers
-from mdlrulelist.rulelistmodel.categoricalmodel.mdl_categorical import length_rule_free_categorical, \
-    length_rule_fixed_categorical
-from mdlrulelist.rulelistmodel.gaussianmodel.mdl_gaussian import length_rule_fixed_gaussian, length_rule_free_gaussian
-from mdlrulelist.util.bitset_operations import bitset2indexes
+from mdlrulelist.rulelistmodel.categoricalmodel.mdl_categorical import length_rule_free_categorical
+from mdlrulelist.rulelistmodel.gaussianmodel.mdl_gaussian import length_rule_free_gaussian
 
 length_rule_free = {
     "gaussian": length_rule_free_gaussian,

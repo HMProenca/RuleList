@@ -5,9 +5,10 @@ Created on Fri Nov  8 16:34:06 2019
 @author: gathu
 """
 
-from math import log, ceil, sqrt, log2, pi
-from scipy.special import comb, gammaln
 from functools import lru_cache
+from math import log, ceil, sqrt, log2
+
+from scipy.special import comb, gammaln
 
 from mdlrulelist.util.build.extra_maths import log2_0
 

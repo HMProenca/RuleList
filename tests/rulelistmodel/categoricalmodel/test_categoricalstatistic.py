@@ -1,43 +1,45 @@
-import pytest
 import numpy as np
 import pandas as pd
+import pytest
 from gmpy2 import bit_mask
 
-from mdlrulelist.data.data import Data
-from mdlrulelist.rulelistmodel.categoricalmodel.categoricalstatistic import CategoricalFixedStatistic, CategoricalFreeStatistic
+from mdlrulelist.datastructure.data import Data
+from mdlrulelist.rulelistmodel.categoricalmodel.categoricalstatistic import CategoricalFixedStatistic, \
+    CategoricalFreeStatistic
 
 
 @pytest.fixture
 def constant_parameters():
     input_n_cutpoints = 5
     input_discretization = "static"
-    input_target_data = "single-nominal"
+    input_target_data = "categorical"
+    input_minsupp = 0
     dictinput = {"attribute1": np.arange(100),
                  "attribute2": np.array(["below50" if i < 50 else "above49" for i in range(100)])}
     input_input_data = pd.DataFrame(data=dictinput)
-    yield input_input_data, input_n_cutpoints, input_discretization, input_target_data
+    yield input_input_data, input_n_cutpoints, input_discretization, input_target_data,input_minsupp
 
 @pytest.fixture
 def generate_inputvalues_one_target(constant_parameters):
-    input_input_data, input_n_cutpoints, input_discretization, input_target_data = constant_parameters
+    input_input_data, input_n_cutpoints, input_discretization, input_target_data,input_minsupp = constant_parameters
     # targets
     dictoutput = {"target1": np.array(["below50" if i < 50 else "above49" for i in range(100)])}
     input_output_data = pd.DataFrame(data=dictoutput)
     data_class = Data(input_input_data, input_n_cutpoints, input_discretization,
-                       input_output_data, input_target_data)
+                       input_output_data, input_target_data,input_minsupp)
     input_bitarray_for_statistic = bit_mask(data_class.number_instances)
     yield data_class, input_bitarray_for_statistic
 
 @pytest.fixture
 def generate_inputvalues_two_targets(constant_parameters):
-    input_input_data, input_n_cutpoints, input_discretization, input_target_data = constant_parameters
+    input_input_data, input_n_cutpoints, input_discretization, input_target_data,input_minsupp = constant_parameters
     # targets
     dictoutput = {"target1": np.array(["below50" if i < 50 else "above49" for i in range(100)]),
                   "target2": np.array(["below25" if i < 25 else "above25" for i in range(100)])}
 
     input_output_data = pd.DataFrame(data=dictoutput)
     data_class = Data(input_input_data, input_n_cutpoints, input_discretization,
-                       input_output_data, input_target_data)
+                       input_output_data, input_target_data,input_minsupp)
     input_bitarray_for_statistic = bit_mask(data_class.number_instances)
     yield data_class, input_bitarray_for_statistic
 

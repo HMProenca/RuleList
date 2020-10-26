@@ -1,8 +1,9 @@
-import pytest
 import numpy as np
 import pandas as pd
+import pytest
 
-from mdlrulelist.data.attribute.nominal_attribute import activation_nominal, NominalAttribute
+from mdlrulelist.datastructure.attribute.nominal_attribute import activation_nominal, NominalAttribute
+
 
 class TestNominalAttribute(object):
     def test_normal(self):
@@ -11,14 +12,15 @@ class TestNominalAttribute(object):
         test_dataframe = pd.DataFrame(data=dictdata)
         input_name = "column1"
         input_max_operators = 1
+        input_minsupp = 0
         expected_number_items = 2
         expected_cardinality_operator = {1: 2}
 
-        output_attribute = NominalAttribute(input_name, test_dataframe[input_name], input_max_operators)
+        output_attribute = NominalAttribute(input_name, test_dataframe[input_name], input_max_operators,input_minsupp)
         actual_number_items= len(output_attribute.items)
         actual_cardinality_operator = output_attribute.cardinality_operator
 
-        pd.testing.assert_series_equal(output_attribute.values, test_dataframe[input_name], check_exact=True)
+        pd.testing.assert_series_equal(output_attribute.values, test_dataframe[input_name])
         assert expected_number_items == actual_number_items
         assert expected_cardinality_operator == actual_cardinality_operator
 
@@ -28,15 +30,17 @@ class TestNominalAttribute(object):
         test_dataframe = pd.DataFrame(data=dictdata)
         input_name = "column1"
         input_max_operators = 1
+        input_minsupp = 0
+
         expected_number_items = 1
         expected_cardinality_operator = {1: 1}
         expected_n_cutpoints = 3
 
-        output_attribute = NominalAttribute(input_name, test_dataframe[input_name], input_max_operators)
+        output_attribute = NominalAttribute(input_name, test_dataframe[input_name], input_max_operators,input_minsupp)
         actual_number_items= len(output_attribute.items)
         actual_cardinality_operator = output_attribute.cardinality_operator
 
-        pd.testing.assert_series_equal(output_attribute.values, test_dataframe[input_name], check_exact=True)
+        pd.testing.assert_series_equal(output_attribute.values, test_dataframe[input_name])
         assert expected_number_items == actual_number_items
         assert expected_cardinality_operator == actual_cardinality_operator
 

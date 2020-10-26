@@ -1,18 +1,18 @@
-import pytest
-
-import pytest
-import numpy as np
-import pandas as pd
-from gmpy2 import mpz, bit_mask, popcount
 from math import log2, exp, pi
 
-from mdlrulelist.data.data import Data
-from mdlrulelist.data.subgroup import Subgroup
-from mdlrulelist.mdl.mdl_base_codes import universal_code_integers, uniform_combination_code, universal_code_integers_maximum, \
+import numpy as np
+import pandas as pd
+import pytest
+from gmpy2 import mpz, bit_mask, popcount
+
+from mdlrulelist.datastructure.data import Data
+from mdlrulelist.datastructure.subgroup import Subgroup
+from mdlrulelist.mdl.mdl_base_codes import universal_code_integers, uniform_combination_code, \
+    universal_code_integers_maximum, \
     uniform_code
 from mdlrulelist.rulelistmodel.gaussianmodel.gaussianrulelist import GaussianRuleList
 from mdlrulelist.rulelistmodel.gaussianmodel.gaussianstatistic import GaussianFixedStatistic, GaussianFreeStatistic
-from mdlrulelist.util.bitset_operations import bitset2indexes, indexes2bitset
+from mdlrulelist.util.bitset_operations import indexes2bitset
 
 
 @pytest.fixture
@@ -20,33 +20,34 @@ def search_parameters():
     input_target_model = "gaussian"
     input_max_depth = 5
     input_beam_width = 10
+    input_minsupp = 0
     input_max_rules = 10
     input_alpha_gain = 1
-    yield input_target_model, input_max_depth, input_beam_width, input_max_rules, input_alpha_gain
+    yield input_target_model, input_max_depth, input_beam_width,input_minsupp, input_max_rules, input_alpha_gain
 
 @pytest.fixture
 def constant_parameters():
     input_n_cutpoints = 5
     input_discretization = "static"
     input_target_data = "gaussian"
-
-    yield input_n_cutpoints, input_discretization, input_target_data
+    input_minsupp = 0
+    yield input_n_cutpoints, input_discretization, input_target_data, input_minsupp
 
 @pytest.fixture
 def generate_input_dataframe_two_target_variancezero(constant_parameters):
-    input_n_cutpoints, input_discretization, input_target_data = constant_parameters
+    input_n_cutpoints, input_discretization, input_target_data, input_minsupp = constant_parameters
     dictinput = {"attribute1": np.arange(100),
                  "attribute2": np.array(["below50" if i < 50 else "above49" for i in range(100)])}
     input_input_data = pd.DataFrame(data=dictinput)
     dictoutput = {"target1": np.arange(100), "target2": np.ones(100)}
     input_output_data = pd.DataFrame(data=dictoutput)
     data = Data(input_input_data, input_n_cutpoints, input_discretization,
-                       input_output_data, input_target_data)
+                       input_output_data, input_target_data,input_minsupp)
     yield data
 
 @pytest.fixture
 def generate_input_dataframe_two_target_normal(constant_parameters):
-    input_n_cutpoints, input_discretization, input_target_data = constant_parameters
+    input_n_cutpoints, input_discretization, input_target_data,input_minsupp = constant_parameters
     dictinput = {"attribute1": np.arange(100000),
                  "attribute2": np.array(["below1000" if i < 1000 else "above999" for i in range(100000)])}
     input_input_data = pd.DataFrame(data=dictinput)
@@ -54,19 +55,19 @@ def generate_input_dataframe_two_target_normal(constant_parameters):
                   "target2": np.random.normal(loc=10,scale=1,size=100000)}
     input_output_data = pd.DataFrame(data=dictoutput)
     data = Data(input_input_data, input_n_cutpoints, input_discretization,
-                       input_output_data, input_target_data)
+                       input_output_data, input_target_data,input_minsupp)
     yield data
 
 @pytest.fixture
 def generate_input_dataframe_one_target(constant_parameters):
-    input_n_cutpoints, input_discretization, input_target_data = constant_parameters
+    input_n_cutpoints, input_discretization, input_target_data,input_minsupp = constant_parameters
     dictinput = {"attribute1": np.arange(100000),
                  "attribute2": np.array(["below1000" if i < 1000 else "above999" for i in range(100000)])}
     input_input_data = pd.DataFrame(data=dictinput)
     dictoutput = {"target1": np.random.normal(loc=1,scale=1,size=100000)}
     input_output_data = pd.DataFrame(data=dictoutput)
     data = Data(input_input_data, input_n_cutpoints, input_discretization,
-                       input_output_data, input_target_data)
+                       input_output_data, input_target_data,input_minsupp)
     yield data
 
 @pytest.fixture
@@ -110,9 +111,9 @@ def generate_subgroup_2subgroups(generate_input_dataframe_two_target_normal):
 
 class TestGaussianRuleList:
     def test_initialization_lengthinfinity(self, generate_input_dataframe_two_target_variancezero,search_parameters):
-        # the length of the data is infinity
+        # the length of the datastructure is infinity
         data = generate_input_dataframe_two_target_variancezero
-        input_target_model, input_max_depth, input_beam_width, input_max_rules, input_alpha_gain = search_parameters
+        input_target_model, input_max_depth, input_beam_width, input_minsupp, input_max_rules, input_alpha_gain = search_parameters
         input_task = "discovery"
 
         expected_statistic_type = GaussianFixedStatistic
@@ -120,7 +121,8 @@ class TestGaussianRuleList:
         expected_length_original = np.inf
         expected_length_defaultrule = np.inf
 
-        output_ruleset = GaussianRuleList(data,input_task, input_max_depth,input_beam_width,input_max_rules,input_alpha_gain)
+        output_ruleset = GaussianRuleList(data,input_task, input_max_depth,input_beam_width,input_minsupp,
+                                          input_max_rules,input_alpha_gain)
 
         assert isinstance(output_ruleset.default_rule_statistics, expected_statistic_type)
         assert expected_length_data == output_ruleset.length_data
@@ -128,15 +130,16 @@ class TestGaussianRuleList:
         assert expected_length_defaultrule == output_ruleset.length_defaultrule
 
     def test_initialization_1target_discovery(self,search_parameters, generate_input_dataframe_one_target):
-        # the length of the data is infinity
+        # the length of the datastructure is infinity
         data = generate_input_dataframe_one_target
-        input_target_model, input_max_depth, input_beam_width, input_max_rules, input_alpha_gain = search_parameters
+        input_target_model, input_max_depth, input_beam_width,input_minsupp, input_max_rules, input_alpha_gain = search_parameters
         input_task = "discovery"
 
         expected_statistic_type = GaussianFixedStatistic
         expected_length_data_minimum = 0.5*100000 + 0.5*100000
 
-        output_ruleset = GaussianRuleList(data,input_task, input_max_depth,input_beam_width,input_max_rules,input_alpha_gain)
+        output_ruleset = GaussianRuleList(data,input_task, input_max_depth,input_beam_width,input_minsupp,
+                                          input_max_rules,input_alpha_gain)
 
         assert isinstance(output_ruleset.default_rule_statistics, expected_statistic_type)
         assert expected_length_data_minimum < output_ruleset.length_defaultrule
@@ -144,28 +147,30 @@ class TestGaussianRuleList:
 
     def test_initialization_2targets_discovery(self,search_parameters, generate_input_dataframe_two_target_normal):
         data = generate_input_dataframe_two_target_normal
-        input_target_model, input_max_depth, input_beam_width, input_max_rules, input_alpha_gain = search_parameters
+        input_target_model, input_max_depth, input_beam_width, input_minsupp, input_max_rules, input_alpha_gain = search_parameters
         input_task = "discovery"
 
         expected_statistic_type = GaussianFixedStatistic
         expected_length_data_minimum = 0.5*100000*(log2(2*pi*1*exp(1)))+0.5*100000*(log2(2*pi*1*exp(1)))
 
-        output_ruleset = GaussianRuleList(data,input_task, input_max_depth,input_beam_width,input_max_rules,input_alpha_gain)
+        output_ruleset = GaussianRuleList(data,input_task, input_max_depth,input_beam_width,input_minsupp,
+                                          input_max_rules,input_alpha_gain)
 
         assert isinstance(output_ruleset.default_rule_statistics, expected_statistic_type)
         assert expected_length_data_minimum < output_ruleset.length_defaultrule
 
     def test_initialization_1target_prediction(self,search_parameters, generate_input_dataframe_one_target):
-        # the length of the data is infinity
+        # the length of the datastructure is infinity
         data = generate_input_dataframe_one_target
-        input_target_model, input_max_depth, input_beam_width, input_max_rules, input_alpha_gain = search_parameters
+        input_target_model, input_max_depth, input_beam_width, input_minsupp, input_max_rules, input_alpha_gain = search_parameters
         input_task = "prediction"
 
 
         expected_statistic_type = GaussianFreeStatistic
         expected_length_data_minimum = 0.5*100000 + 0.5*100000
 
-        output_ruleset = GaussianRuleList(data,input_task, input_max_depth,input_beam_width,input_max_rules,input_alpha_gain)
+        output_ruleset = GaussianRuleList(data,input_task, input_max_depth,input_beam_width,input_minsupp,
+                                          input_max_rules,input_alpha_gain)
 
         assert isinstance(output_ruleset.default_rule_statistics, expected_statistic_type)
         assert expected_length_data_minimum < output_ruleset.length_defaultrule
@@ -173,13 +178,14 @@ class TestGaussianRuleList:
 
     def test_initialization_2targets_prediction(self,search_parameters, generate_input_dataframe_two_target_normal):
         data = generate_input_dataframe_two_target_normal
-        input_target_model, input_max_depth, input_beam_width, input_max_rules, input_alpha_gain = search_parameters
+        input_target_model, input_max_depth, input_beam_width, input_minsupp, input_max_rules, input_alpha_gain = search_parameters
         input_task = "prediction"
 
         expected_statistic_type = GaussianFreeStatistic
         expected_length_data_minimum = 0.5*100000*(log2(2*pi*1*exp(1)))+0.5*100000*(log2(2*pi*1*exp(1)))
 
-        output_ruleset = GaussianRuleList(data,input_task, input_max_depth,input_beam_width,input_max_rules,input_alpha_gain)
+        output_ruleset = GaussianRuleList(data,input_task, input_max_depth,input_beam_width,input_minsupp,
+                                          input_max_rules,input_alpha_gain)
 
         assert isinstance(output_ruleset.default_rule_statistics, expected_statistic_type)
         assert expected_length_data_minimum < output_ruleset.length_defaultrule
@@ -187,11 +193,12 @@ class TestGaussianRuleList:
     def test_add_rule_itemnumeric(self,search_parameters, generate_input_dataframe_two_target_normal,
                                   generate_subgroup_oneitem_numeric):
         data = generate_input_dataframe_two_target_normal
-        input_target_model, input_max_depth, input_beam_width, input_max_rules, input_alpha_gain = search_parameters
+        input_target_model, input_max_depth, input_beam_width, input_minsupp, input_max_rules, input_alpha_gain = search_parameters
         subgroup2add = generate_subgroup_oneitem_numeric
         input_task = "discovery"
 
-        output_ruleset = GaussianRuleList(data,input_task, input_max_depth,input_beam_width,input_max_rules,input_alpha_gain)
+        output_ruleset = GaussianRuleList(data,input_task, input_max_depth,input_beam_width,input_minsupp,
+                                          input_max_rules,input_alpha_gain)
         output_ruleset.add_rule(subgroup2add,data)
 
 
@@ -224,12 +231,12 @@ class TestGaussianRuleList:
     def test_add_rule_2items(self, search_parameters, generate_input_dataframe_two_target_normal,
                              generate_subgroup_2item_numeric_and_nominal):
         data = generate_input_dataframe_two_target_normal
-        input_target_model, input_max_depth, input_beam_width, input_max_rules, input_alpha_gain = search_parameters
+        input_target_model, input_max_depth, input_beam_width, input_minsupp, input_max_rules, input_alpha_gain = search_parameters
         subgroup2add = generate_subgroup_2item_numeric_and_nominal
         input_task = "discovery"
 
-        output_ruleset = GaussianRuleList(data, input_task, input_max_depth, input_beam_width, input_max_rules,
-                                          input_alpha_gain)
+        output_ruleset = GaussianRuleList(data, input_task, input_max_depth, input_beam_width,input_minsupp,
+                                          input_max_rules,input_alpha_gain)
         output_ruleset.add_rule(subgroup2add, data)
 
         expected_number_instances = data.number_instances
@@ -260,12 +267,12 @@ class TestGaussianRuleList:
     def test_add_rule_2items(self, search_parameters, generate_input_dataframe_two_target_normal,
                              generate_subgroup_2subgroups):
         data = generate_input_dataframe_two_target_normal
-        input_target_model, input_max_depth, input_beam_width, input_max_rules, input_alpha_gain = search_parameters
+        input_target_model, input_max_depth, input_beam_width, input_minsupp, input_max_rules, input_alpha_gain = search_parameters
         subgroup2add1,subgroup2add2  = generate_subgroup_2subgroups
         input_task = "discovery"
 
-        output_ruleset = GaussianRuleList(data, input_task, input_max_depth, input_beam_width, input_max_rules,
-                                          input_alpha_gain)
+        output_ruleset = GaussianRuleList(data, input_task, input_max_depth, input_beam_width, input_minsupp,
+                                          input_max_rules,input_alpha_gain)
         output_ruleset.add_rule(subgroup2add1, data)
         output_ruleset.add_rule(subgroup2add2, data)
 

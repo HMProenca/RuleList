@@ -4,11 +4,13 @@ Created on Wed Jan 15 18:09:04 2020
 
 @author: gathu
 """
-from mdlrulelist.mdl.mdl_base_codes import log2_gamma_half
-from mdlrulelist.rulelistmodel.gaussianmodel.gaussianstatistic import GaussianFreeStatistic, GaussianFixedStatistic
-from numpy import NINF,inf
-
 from math import pi, log2
+
+from numpy import inf
+
+from mdlrulelist.mdl.mdl_base_codes import log2_gamma_half
+from mdlrulelist.rulelistmodel.gaussianmodel.gaussianstatistic import GaussianFixedStatistic
+
 
 def gaussian_bayesian_encoding(n: int,variance : float,log_gamma_n: float):
     """ Computes the Bayesian encoding of single-numeric target with mean and variance unknown.

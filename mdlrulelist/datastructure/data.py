@@ -1,16 +1,14 @@
 from dataclasses import dataclass, field
-from typing import List, AnyStr, Any, Literal
+from typing import List, Literal
 
 import pandas as pd
-import numpy as np
 from pandas.api.types import is_numeric_dtype
-from collections import namedtuple
 
+from mdlrulelist.datastructure.attribute.attribute import Attribute
+from mdlrulelist.datastructure.attribute.nominal_attribute import NominalAttribute
+from mdlrulelist.datastructure.attribute.numeric_attribute import NumericAttribute
 from mdlrulelist.rulelistmodel.categoricalmodel.categoricaltarget import CategoricalTarget
 from mdlrulelist.rulelistmodel.gaussianmodel.gaussiantarget import GaussianTargets
-from mdlrulelist.data.attribute.attribute import Attribute
-from mdlrulelist.data.attribute.nominal_attribute import NominalAttribute
-from mdlrulelist.data.attribute.numeric_attribute import NumericAttribute
 
 #TODO: add location and multivariate gaussian
 init_target = {
@@ -27,7 +25,7 @@ class Data:
 
     Attributes
     ----------
-    data : pd.DataFrame
+    datastructure : pd.DataFrame
         It contains a view to the original input dataset.
     attributes : List[Attribute]
         A list of the variables and its characteristics.
@@ -54,7 +52,7 @@ class Data:
         self.input_data = pd.DataFrame(self.input_data) #in case it is a series it will be transformed to DataFrame
         self.target_data = pd.DataFrame(self.target_data)
         if self.input_data.shape[0] != self.target_data.shape[0]:
-            raise IndexError('Input data and Target data should have the same number of instances')
+            raise IndexError('Input datastructure and Target datastructure should have the same number of instances')
         self.attribute_names = set(self.input_data.columns)
         self.target_names = set(self.target_data.columns)
         self.attributes = self._init_attributes()

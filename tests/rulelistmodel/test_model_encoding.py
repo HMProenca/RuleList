@@ -1,10 +1,10 @@
 from math import log2
 
-import pytest
-import pandas as pd
 import numpy as np
+import pandas as pd
+import pytest
 
-from mdlrulelist.data.attribute import NumericAttribute, NominalAttribute
+from mdlrulelist.datastructure.attribute import NumericAttribute, NominalAttribute
 from mdlrulelist.mdl.mdl_base_codes import universal_code_integers_maximum
 from mdlrulelist.rulelistmodel.model_encoding import compute_item_length
 
@@ -16,8 +16,9 @@ def auxiliar_numericattribute():
     input_name = "column1"
     input_max_operators = 2
     input_n_cutpoints = 3
+    input_minsupp = 0
     input_discretization = "static"
-    numericattribute = NumericAttribute(input_name, test_dataframe[input_name], input_max_operators,
+    numericattribute = NumericAttribute(input_name, test_dataframe[input_name], input_max_operators,input_minsupp,
                                     input_n_cutpoints, input_discretization)
     return numericattribute
 
@@ -28,7 +29,8 @@ def auxiliar_nominalattribute():
     test_dataframe = pd.DataFrame(data=dictdata)
     input_name = "column1"
     input_max_operators = 1
-    nominalattribute = NominalAttribute(input_name, test_dataframe[input_name], input_max_operators)
+    input_minsupp = 0
+    nominalattribute = NominalAttribute(input_name, test_dataframe[input_name], input_max_operators,input_minsupp)
     return nominalattribute
 
 
@@ -57,7 +59,3 @@ class TestComputeItemLength:
         assert expected_output[0][0] == output[0][0]
         assert expected_output[0][1] == output[0][1]
         assert expected_output[0][2] == pytest.approx(output[0][2])
-
-
-
-

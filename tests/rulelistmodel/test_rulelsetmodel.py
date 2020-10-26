@@ -1,28 +1,31 @@
-import pytest
 import numpy as np
 import pandas as pd
+import pytest
 from gmpy2 import mpz, bit_mask
 
-from mdlrulelist.data.data import Data
+from mdlrulelist.datastructure.data import Data
 from mdlrulelist.rulelistmodel.rulesetmodel import RuleSetModel
+
 
 @pytest.fixture
 def constant_parameters():
     input_n_cutpoints = 5
     input_discretization = "static"
     input_target_data = "gaussian"
+    input_minsupp = 0
     dictinput = {"attribute1": np.arange(100),
                  "attribute2": np.array(["below50" if i < 50 else "above49" for i in range(100)])}
     input_input_data = pd.DataFrame(data=dictinput)
     dictoutput = {"target1": np.arange(100), "target2": np.ones(100)}
     input_output_data = pd.DataFrame(data=dictoutput)
-    yield input_input_data, input_output_data, input_n_cutpoints, input_discretization, input_target_data
+    yield input_input_data, input_output_data, input_n_cutpoints, input_discretization, input_target_data,input_minsupp
 
 @pytest.fixture
 def generate_input_dataframe_two_target(constant_parameters):
-    input_input_data, input_output_data, input_n_cutpoints, input_discretization, input_target_data = constant_parameters
+    input_input_data, input_output_data, input_n_cutpoints, input_discretization, input_target_data ,input_minsupp\
+        = constant_parameters
     data = Data(input_input_data, input_n_cutpoints, input_discretization,
-                       input_output_data, input_target_data)
+                       input_output_data, input_target_data,input_minsupp)
     yield data
 
 class TestRuleSetModel:
@@ -32,6 +35,7 @@ class TestRuleSetModel:
         input_target_model = "gaussian"
         input_max_depth = 5
         input_beam_width = 10
+        input_minsupp = 0
         input_max_rules = 10
         input_alpha_gain = 1
 
@@ -54,7 +58,8 @@ class TestRuleSetModel:
         expected_subgroups = []
         expected_length_model = 0
 
-        output_ruleset = RuleSetModel(data,input_task, input_max_depth,input_beam_width,input_max_rules,input_alpha_gain)
+        output_ruleset = RuleSetModel(data,input_task, input_max_depth,input_beam_width,input_minsupp,
+                                      input_max_rules,input_alpha_gain)
 
         assert expected_task == output_ruleset.task
         assert expected_target_model == output_ruleset.target_model

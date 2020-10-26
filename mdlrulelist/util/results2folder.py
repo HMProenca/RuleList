@@ -5,9 +5,10 @@ Created on Fri Nov 15 18:44:34 2019
 @author: gathu
 """
 
-from datetime import datetime
 import os
 import shutil
+from datetime import datetime
+
 
 def makefolder_time():
     today = datetime.now()
