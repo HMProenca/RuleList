@@ -1,8 +1,8 @@
-from mdlrulelist.rulelistmodel.categoricalmodel.categoricalstatistic import CategoricalFreeStatistic, CategoricalFixedStatistic
-from mdlrulelist.rulelistmodel.categoricalmodel.mdl_categorical import length_rule_fixed_categorical, \
+from rulelist.rulelistmodel.categoricalmodel.categoricalstatistic import CategoricalFreeStatistic, CategoricalFixedStatistic
+from rulelist.rulelistmodel.categoricalmodel.mdl_categorical import length_rule_fixed_categorical, \
     length_rule_free_categorical
-from mdlrulelist.rulelistmodel.rulesetmodel import RuleSetModel
-from mdlrulelist.util.build.extra_maths import log2_0
+from rulelist.rulelistmodel.rulesetmodel import RuleSetModel
+from rulelist.util.build.extra_maths import log2_0
 
 default_rule_statistic_categorical = {
     "discovery": CategoricalFixedStatistic,

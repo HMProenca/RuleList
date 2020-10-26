@@ -10,7 +10,7 @@ from math import log, ceil, sqrt, log2
 
 from scipy.special import comb, gammaln
 
-from mdlrulelist.util.build.extra_maths import log2_0
+from rulelist.util.build.extra_maths import log2_0
 
 
 @lru_cache(maxsize=20000,typed=True)

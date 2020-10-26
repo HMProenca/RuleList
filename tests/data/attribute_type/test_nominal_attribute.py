@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from mdlrulelist.datastructure.attribute.nominal_attribute import activation_nominal, NominalAttribute
+from rulelist.datastructure.attribute.nominal_attribute import activation_nominal, NominalAttribute
 
 
 class TestNominalAttribute(object):

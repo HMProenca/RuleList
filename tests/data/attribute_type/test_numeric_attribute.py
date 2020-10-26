@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from mdlrulelist.datastructure.attribute.numeric_attribute import activation_numeric, find_cutpoints, NumericAttribute, \
+from rulelist.datastructure.attribute.numeric_attribute import activation_numeric, find_cutpoints, NumericAttribute, \
     create_item
 
 

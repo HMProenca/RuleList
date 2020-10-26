@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 from scipy.special.cython_special import gammaln
 
-from mdlrulelist.rulelistmodel.gaussianmodel.mdl_gaussian import gaussian_bayesian_encoding, gaussian_fixed_encoding, \
+from rulelist.rulelistmodel.gaussianmodel.mdl_gaussian import gaussian_bayesian_encoding, gaussian_fixed_encoding, \
     length_rule_free_gaussian, length_rule_fixed_gaussian
 
 

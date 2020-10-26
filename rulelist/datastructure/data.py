@@ -4,11 +4,11 @@ from typing import List, Literal
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
 
-from mdlrulelist.datastructure.attribute.attribute import Attribute
-from mdlrulelist.datastructure.attribute.nominal_attribute import NominalAttribute
-from mdlrulelist.datastructure.attribute.numeric_attribute import NumericAttribute
-from mdlrulelist.rulelistmodel.categoricalmodel.categoricaltarget import CategoricalTarget
-from mdlrulelist.rulelistmodel.gaussianmodel.gaussiantarget import GaussianTargets
+from rulelist.datastructure.attribute.attribute import Attribute
+from rulelist.datastructure.attribute.nominal_attribute import NominalAttribute
+from rulelist.datastructure.attribute.numeric_attribute import NumericAttribute
+from rulelist.rulelistmodel.categoricalmodel.categoricaltarget import CategoricalTarget
+from rulelist.rulelistmodel.gaussianmodel.gaussiantarget import GaussianTargets
 
 #TODO: add location and multivariate gaussian
 init_target = {

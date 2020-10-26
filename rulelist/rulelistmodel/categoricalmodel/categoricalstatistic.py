@@ -3,8 +3,8 @@ from typing import Dict, Any
 
 from gmpy2 import popcount
 
-from mdlrulelist.datastructure.data import Data
-from mdlrulelist.rulelistmodel.statistic import Statistic
+from rulelist.datastructure.data import Data
+from rulelist.rulelistmodel.statistic import Statistic
 
 
 @dataclass(repr=True, eq=False, order=False, unsafe_hash=True, frozen=False)

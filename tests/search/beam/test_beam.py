@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from mdlrulelist.search.beam.beam import Beam
+from rulelist.search.beam.beam import Beam
 
 
 @pytest.fixture

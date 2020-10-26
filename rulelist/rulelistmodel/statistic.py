@@ -2,7 +2,7 @@ from dataclasses import InitVar, dataclass, field
 
 from gmpy2 import popcount
 
-from mdlrulelist.datastructure.data import Data
+from rulelist.datastructure.data import Data
 
 
 @dataclass

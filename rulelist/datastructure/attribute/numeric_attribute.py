@@ -5,8 +5,8 @@ from typing import List, Tuple, AnyStr, Iterator, Dict
 import numpy as np
 from pandas import DataFrame
 
-from mdlrulelist.datastructure.attribute.attribute import Attribute, Item
-from mdlrulelist.util.bitset_operations import indexes2bitset
+from rulelist.datastructure.attribute.attribute import Attribute, Item
+from rulelist.util.bitset_operations import indexes2bitset
 
 
 def activation_numeric(df: DataFrame, attribute_name: AnyStr, minval: float, maxval: float) -> DataFrame:

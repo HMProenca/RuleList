@@ -3,7 +3,7 @@ import pandas as pd
 import pytest
 
 
-from mdlrulelist.datastructure.data import Data
+from rulelist.datastructure.data import Data
 
 
 @pytest.fixture

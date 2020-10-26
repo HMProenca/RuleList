@@ -5,14 +5,14 @@ import pandas as pd
 import pytest
 from gmpy2 import mpz, bit_mask, popcount
 
-from mdlrulelist.datastructure.data import Data
-from mdlrulelist.datastructure.subgroup import Subgroup
-from mdlrulelist.mdl.mdl_base_codes import universal_code_integers, uniform_combination_code, \
+from rulelist.datastructure.data import Data
+from rulelist.datastructure.subgroup import Subgroup
+from rulelist.mdl.mdl_base_codes import universal_code_integers, uniform_combination_code, \
     universal_code_integers_maximum, \
     uniform_code
-from mdlrulelist.rulelistmodel.gaussianmodel.gaussianrulelist import GaussianRuleList
-from mdlrulelist.rulelistmodel.gaussianmodel.gaussianstatistic import GaussianFixedStatistic, GaussianFreeStatistic
-from mdlrulelist.util.bitset_operations import indexes2bitset
+from rulelist.rulelistmodel.gaussianmodel.gaussianrulelist import GaussianRuleList
+from rulelist.rulelistmodel.gaussianmodel.gaussianstatistic import GaussianFixedStatistic, GaussianFreeStatistic
+from rulelist.util.bitset_operations import indexes2bitset
 
 
 @pytest.fixture

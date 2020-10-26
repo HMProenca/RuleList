@@ -4,9 +4,9 @@ from typing import List
 import numpy as np
 from numba import jit
 
-from mdlrulelist.datastructure.data import Data
-from mdlrulelist.rulelistmodel.statistic import Statistic
-from mdlrulelist.util.bitset_operations import bitset2indexes
+from rulelist.datastructure.data import Data
+from rulelist.rulelistmodel.statistic import Statistic
+from rulelist.util.bitset_operations import bitset2indexes
 
 
 @jit(nopython=True)

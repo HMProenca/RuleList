@@ -9,9 +9,9 @@ from functools import reduce
 import numpy as np
 from gmpy2 import popcount, bit_mask
 
-from mdlrulelist.datastructure.subgroup import Subgroup
-from mdlrulelist.rulelistmodel.gain_add_rule import compute_delta_score, compute_statistics_newrules
-from mdlrulelist.search.beam.beam import Beam
+from rulelist.datastructure.subgroup import Subgroup
+from rulelist.rulelistmodel.gain_add_rule import compute_delta_score, compute_statistics_newrules
+from rulelist.search.beam.beam import Beam
 
 
 def refine_subgroup(rulelist,data,candidate2refine,beam,subgroup2add):

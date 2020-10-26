@@ -3,8 +3,8 @@ import pandas as pd
 import pytest
 from gmpy2 import bit_mask
 
-from mdlrulelist.datastructure.data import Data
-from mdlrulelist.rulelistmodel.categoricalmodel.categoricalstatistic import CategoricalFixedStatistic, \
+from rulelist.datastructure.data import Data
+from rulelist.rulelistmodel.categoricalmodel.categoricalstatistic import CategoricalFixedStatistic, \
     CategoricalFreeStatistic
 
 

@@ -3,8 +3,8 @@ import pandas as pd
 import pytest
 from gmpy2 import bit_mask
 
-from mdlrulelist.datastructure.data import Data
-from mdlrulelist.rulelistmodel.gaussianmodel.gaussianstatistic import find2points, GaussianFixedStatistic, \
+from rulelist.datastructure.data import Data
+from rulelist.rulelistmodel.gaussianmodel.gaussianstatistic import find2points, GaussianFixedStatistic, \
     GaussianFreeStatistic
 
 

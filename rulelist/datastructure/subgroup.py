@@ -5,7 +5,7 @@ from typing import List
 import numpy as np
 from gmpy2 import mpz, popcount
 
-from mdlrulelist.datastructure.attribute.attribute import Item
+from rulelist.datastructure.attribute.attribute import Item
 
 
 class Subgroup():

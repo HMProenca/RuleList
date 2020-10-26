@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 from gmpy2 import mpz, bit_mask
 
-from mdlrulelist.util.bitset_operations import indexes2bitset
+from rulelist.util.bitset_operations import indexes2bitset
 
 
 @dataclass

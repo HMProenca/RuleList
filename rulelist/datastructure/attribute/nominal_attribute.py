@@ -5,8 +5,8 @@ from typing import List, Tuple, Any, AnyStr, Dict
 import numpy as np
 import pandas as pd
 
-from mdlrulelist.datastructure.attribute.attribute import Item, Attribute
-from mdlrulelist.util.bitset_operations import indexes2bitset
+from rulelist.datastructure.attribute.attribute import Item, Attribute
+from rulelist.util.bitset_operations import indexes2bitset
 
 
 def activation_nominal(df: pd.DataFrame, attribute_name: AnyStr, category: Any) -> pd.DataFrame:

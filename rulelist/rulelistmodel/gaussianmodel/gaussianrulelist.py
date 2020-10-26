@@ -1,8 +1,8 @@
 import numpy as np
 
-from mdlrulelist.rulelistmodel.gaussianmodel.gaussianstatistic import GaussianFixedStatistic, GaussianFreeStatistic
-from mdlrulelist.rulelistmodel.gaussianmodel.mdl_gaussian import length_rule_fixed_gaussian, length_rule_free_gaussian
-from mdlrulelist.rulelistmodel.rulesetmodel import RuleSetModel
+from rulelist.rulelistmodel.gaussianmodel.gaussianstatistic import GaussianFixedStatistic, GaussianFreeStatistic
+from rulelist.rulelistmodel.gaussianmodel.mdl_gaussian import length_rule_fixed_gaussian, length_rule_free_gaussian
+from rulelist.rulelistmodel.rulesetmodel import RuleSetModel
 
 default_rule_statistic_gaussian = {
     "discovery": GaussianFixedStatistic,

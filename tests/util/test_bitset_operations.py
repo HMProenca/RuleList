@@ -1,7 +1,7 @@
 import numpy as np
 from gmpy2 import mpz
 
-from mdlrulelist.util.bitset_operations import indexes2bitset, bitset2indexes
+from rulelist.util.bitset_operations import indexes2bitset, bitset2indexes
 
 
 class TestIndexes2Bitset:

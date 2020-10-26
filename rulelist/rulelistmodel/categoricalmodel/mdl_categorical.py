@@ -1,6 +1,6 @@
-from mdlrulelist.mdl.mdl_base_codes import log_multinomial
-from mdlrulelist.rulelistmodel.categoricalmodel.categoricalstatistic import CategoricalFreeStatistic,CategoricalFixedStatistic
-from mdlrulelist.util.build.extra_maths import log2_0
+from rulelist.mdl.mdl_base_codes import log_multinomial
+from rulelist.rulelistmodel.categoricalmodel.categoricalstatistic import CategoricalFreeStatistic,CategoricalFixedStatistic
+from rulelist.util.build.extra_maths import log2_0
 
 
 def categorical_free_encoding(statistics, varname):

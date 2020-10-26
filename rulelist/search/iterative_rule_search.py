@@ -4,10 +4,10 @@ Created on Fri Nov  8 13:52:14 2019
 
 @author: gathu
 """
-from mdlrulelist.datastructure.data import Data
-from mdlrulelist.rulelistmodel.categoricalmodel.categoricalrulelist import CategoricalRuleList
-from mdlrulelist.rulelistmodel.gaussianmodel.gaussianrulelist import GaussianRuleList
-from mdlrulelist.search.beam.itemset_beamsearch import find_best_rule
+from rulelist.datastructure.data import Data
+from rulelist.rulelistmodel.categoricalmodel.categoricalrulelist import CategoricalRuleList
+from rulelist.rulelistmodel.gaussianmodel.gaussianrulelist import GaussianRuleList
+from rulelist.search.beam.itemset_beamsearch import find_best_rule
 
 rule_list_models = {
     "gaussian":GaussianRuleList,

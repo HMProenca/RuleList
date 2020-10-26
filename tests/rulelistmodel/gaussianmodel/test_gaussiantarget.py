@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from gmpy2 import bit_mask
 
-from mdlrulelist.rulelistmodel.gaussianmodel.gaussiantarget import GaussianTargets
+from rulelist.rulelistmodel.gaussianmodel.gaussiantarget import GaussianTargets
 
 
 class TestGaussianTargets(object):

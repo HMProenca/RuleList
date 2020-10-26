@@ -4,9 +4,9 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from mdlrulelist.datastructure.attribute import NumericAttribute, NominalAttribute
-from mdlrulelist.mdl.mdl_base_codes import universal_code_integers_maximum
-from mdlrulelist.rulelistmodel.model_encoding import compute_item_length
+from rulelist.datastructure.attribute import NumericAttribute, NominalAttribute
+from rulelist.mdl.mdl_base_codes import universal_code_integers_maximum
+from rulelist.rulelistmodel.model_encoding import compute_item_length
 
 
 @pytest.fixture

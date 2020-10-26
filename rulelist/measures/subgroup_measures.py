@@ -10,7 +10,7 @@ from math import exp, log2
 import numpy as np
 from gmpy2 import xmpz, mpz, popcount
 
-from mdlrulelist.mdl.mdl_base_codes import log2_0
+from rulelist.mdl.mdl_base_codes import log2_0
 
 
 def jaccard_index_model(list_bitsets):

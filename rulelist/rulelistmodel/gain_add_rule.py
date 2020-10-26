@@ -1,6 +1,6 @@
-from mdlrulelist.mdl.mdl_base_codes import universal_code_integers
-from mdlrulelist.rulelistmodel.categoricalmodel.mdl_categorical import length_rule_free_categorical
-from mdlrulelist.rulelistmodel.gaussianmodel.mdl_gaussian import length_rule_free_gaussian
+from rulelist.mdl.mdl_base_codes import universal_code_integers
+from rulelist.rulelistmodel.categoricalmodel.mdl_categorical import length_rule_free_categorical
+from rulelist.rulelistmodel.gaussianmodel.mdl_gaussian import length_rule_free_gaussian
 
 length_rule_free = {
     "gaussian": length_rule_free_gaussian,

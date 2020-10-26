@@ -3,8 +3,8 @@ import pandas as pd
 import pytest
 from gmpy2 import bit_mask
 
-from mdlrulelist.rulelistmodel.categoricalmodel.categoricaltarget import CategoricalTarget
-from mdlrulelist.util.bitset_operations import indexes2bitset
+from rulelist.rulelistmodel.categoricalmodel.categoricaltarget import CategoricalTarget
+from rulelist.util.bitset_operations import indexes2bitset
 
 
 @pytest.fixture

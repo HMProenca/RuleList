@@ -2,11 +2,11 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from mdlrulelist.datastructure.data import Data
-from mdlrulelist.datastructure.subgroup import Subgroup
-from mdlrulelist.rulelistmodel.gaussianmodel.gaussianrulelist import GaussianRuleList
-from mdlrulelist.search.beam.beam import Beam
-from mdlrulelist.search.beam.itemset_beamsearch import refine_subgroup, find_best_rule
+from rulelist.datastructure.data import Data
+from rulelist.datastructure.subgroup import Subgroup
+from rulelist.rulelistmodel.gaussianmodel.gaussianrulelist import GaussianRuleList
+from rulelist.search.beam.beam import Beam
+from rulelist.search.beam.itemset_beamsearch import refine_subgroup, find_best_rule
 
 
 @pytest.fixture

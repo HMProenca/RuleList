@@ -2,10 +2,10 @@ from copy import deepcopy
 
 from gmpy2 import mpz, bit_mask, popcount
 
-from mdlrulelist.mdl.mdl_base_codes import uniform_combination_code
-from mdlrulelist.rulelistmodel.data_encoding import compute_length_data
-from mdlrulelist.rulelistmodel.model_encoding import compute_item_length, compute_length_model
-from mdlrulelist.rulelistmodel.statistic import Statistic
+from rulelist.mdl.mdl_base_codes import uniform_combination_code
+from rulelist.rulelistmodel.data_encoding import compute_length_data
+from rulelist.rulelistmodel.model_encoding import compute_item_length, compute_length_model
+from rulelist.rulelistmodel.statistic import Statistic
 
 
 class RuleSetModel():

@@ -8,8 +8,8 @@ from math import pi, log2
 
 from numpy import inf
 
-from mdlrulelist.mdl.mdl_base_codes import log2_gamma_half
-from mdlrulelist.rulelistmodel.gaussianmodel.gaussianstatistic import GaussianFixedStatistic
+from rulelist.mdl.mdl_base_codes import log2_gamma_half
+from rulelist.rulelistmodel.gaussianmodel.gaussianstatistic import GaussianFixedStatistic
 
 
 def gaussian_bayesian_encoding(n: int,variance : float,log_gamma_n: float):

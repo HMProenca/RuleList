@@ -3,8 +3,8 @@ import pandas as pd
 import pytest
 from gmpy2 import mpz, bit_mask
 
-from mdlrulelist.datastructure.data import Data
-from mdlrulelist.rulelistmodel.rulesetmodel import RuleSetModel
+from rulelist.datastructure.data import Data
+from rulelist.rulelistmodel.rulesetmodel import RuleSetModel
 
 
 @pytest.fixture

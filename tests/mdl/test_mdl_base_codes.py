@@ -2,7 +2,7 @@ from math import log2
 
 import pytest
 
-from mdlrulelist.mdl.mdl_base_codes import multinomial_with_recurrence, universal_code_integers, \
+from rulelist.mdl.mdl_base_codes import multinomial_with_recurrence, universal_code_integers, \
     universal_code_integers_maximum
 
 

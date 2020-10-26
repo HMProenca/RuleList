@@ -9,9 +9,9 @@ from typing import Literal
 
 import numpy as np
 
-from mdlrulelist.rulelistmodel.prediction import predict_rulelist
-from mdlrulelist.search.iterative_rule_search import _fit_rulelist
-from mdlrulelist.util.bitset_operations import bitset2indexes
+from rulelist.rulelistmodel.prediction import predict_rulelist
+from rulelist.search.iterative_rule_search import _fit_rulelist
+from rulelist.util.bitset_operations import bitset2indexes
 
 
 class RuleList():
@@ -145,9 +145,6 @@ class RuleList():
         self : object
         """
 
-
-
-
         start_time = time()
         self._rulelist = _fit_rulelist(
                 X,Y, self.target_model, self.max_depth,self.beam_width,self.min_support, self.n_cutpoints,
@@ -160,8 +157,7 @@ class RuleList():
 
 
     def predict(self,X):
-        """ Predict for new datastructure what is it going to be the performance
-        if rule list not fit it does not work
+        """ Predicts the target variable for an input data X.
         ----------
         X : a numpy array or pandas dataframe with the variables in the same
             poistion (column number) as given in "fit" function.

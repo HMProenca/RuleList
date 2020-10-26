@@ -1,5 +1,5 @@
-from mdlrulelist.datastructure.attribute.attribute import Attribute
-from mdlrulelist.mdl.mdl_base_codes import universal_code_integers_maximum, uniform_code, universal_code_integers
+from rulelist.datastructure.attribute.attribute import Attribute
+from rulelist.mdl.mdl_base_codes import universal_code_integers_maximum, uniform_code, universal_code_integers
 
 
 def compute_length_model(rulelist):
