@@ -55,5 +55,5 @@ def find_best_rule(rulelist, data):
         beam = beam.clean()
         for candidate2refine in candidates:
             beam, subgroup2add = refine_subgroup(rulelist,data,candidate2refine,beam,subgroup2add)
-    print("Gain datastructure: {} ; gain model : {} ; gain: {}".format(subgroup2add.delta_data,subgroup2add.delta_model,subgroup2add.score))
+    #print("Gain datastructure: {} ; gain model : {} ; gain: {}".format(subgroup2add.delta_data,subgroup2add.delta_model,subgroup2add.score))
     return subgroup2add
