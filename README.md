@@ -13,13 +13,6 @@ This project was written for Python 3.7. All required packages from PyPI are spe
 *NOTE:* This list of packages includes the `gmpy2` package.
 
 
-## Installation
-
-You can pip install this package:
-```
-
-```
-
 ## Example of usage:
 
 ```python
