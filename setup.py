@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='rulelists',
+    name='rulelist',
     version='0.0.0',
     packages=['tests', 'tests.mdl', 'tests.data', 'tests.util', 'tests.search', 'tests.search.beam',
               'tests.rulelistmodel', 'tests.rulelistmodel.categoricalmodel', 'rulelist', 'rulelist.mdl',
