@@ -7,11 +7,11 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name= 'rulelist',
-    version='0.0.6',
+    version='0.0.8',
     description='Learn rule lists from data for classification, regression or subgroup discovery',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=['rulelist'],
+    packages=setuptools.find_packages(),
     url='https://github.com/HMProenca/RuleList',
     license='MIT License',
     author='Hugo Proenca',
