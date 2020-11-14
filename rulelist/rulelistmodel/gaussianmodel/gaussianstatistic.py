@@ -2,14 +2,14 @@ from dataclasses import dataclass, field, InitVar
 from typing import List
 
 import numpy as np
-from numba import jit
+#from numba import jit
 
 from rulelist.datastructure.data import Data
 from rulelist.rulelistmodel.statistic import Statistic
 from rulelist.util.bitset_operations import bitset2indexes
 
 
-@jit(nopython=True)
+#@jit(nopython=True)
 def compute_mean_special(column_data, indices_subgroup):
 
     sum_values = 0
@@ -17,17 +17,17 @@ def compute_mean_special(column_data, indices_subgroup):
         sum_values = sum_values + column_data[indices_subgroup[i]]
     return sum_values/len(indices_subgroup)
 
-@jit(nopython=True)
+#@jit(nopython=True)
 def compute_mean(values):
     return np.mean(values)
 
-@jit(nopython=True)
+#@jit(nopython=True)
 def compute_RSS(values, meanval):
     c = values - meanval
     RSS = np.dot(c, c)
     return RSS
 
-@jit(nopython=True)
+#@jit(nopython=True)
 def find2points(values, meandata,bigvalue):
     closest = np.array([bigvalue, bigvalue])
     #closest = values[0:2]
@@ -202,12 +202,11 @@ class GaussianFreeStatistic(Statistic):
         return self
 
     def _not_enough_points(self,data):
-        self.mean = [np.nan for it in range(data.number_targets)]
-        self.variance = [0 for it in range(data.number_targets)]
-        self.rss = [np.inf for it in range(data.number_targets)]
-        self.mean_2points = [np.nan for it in range(data.number_targets)]
-        self.variance_2points = [np.nan for it in range(data.number_targets)]
-        self.rss_2points =[np.nan for it in range(data.number_targets)]
-        self.rss_2dataset= [np.nan for it in range(data.number_targets)]
-
+        self.mean = np.array([np.nan for it in range(data.number_targets)])
+        self.variance = np.array([0 for it in range(data.number_targets)])
+        self.rss = np.array([np.inf for it in range(data.number_targets)])
+        self.mean_2points = np.array([np.nan for it in range(data.number_targets)])
+        self.variance_2points = np.array([np.nan for it in range(data.number_targets)])
+        self.rss_2points =np.array([np.nan for it in range(data.number_targets)])
+        self.rss_2dataset= np.array([np.nan for it in range(data.number_targets)])
         return self

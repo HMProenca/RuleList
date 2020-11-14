@@ -7,7 +7,7 @@ from rulelist.datastructure.data import Data
 from rulelist.rulelistmodel.categoricalmodel.mdl_categorical import categorical_free_encoding, \
     categorical_fixed_encoding, \
     length_rule_free_categorical, length_rule_fixed_categorical
-from rulelist.util.build.extra_maths import log2_0
+from rulelist.util.extra_maths import log2_0
 
 
 @pytest.fixture

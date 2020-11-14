@@ -2,7 +2,7 @@ from rulelist.rulelistmodel.categoricalmodel.categoricalstatistic import Categor
 from rulelist.rulelistmodel.categoricalmodel.mdl_categorical import length_rule_fixed_categorical, \
     length_rule_free_categorical
 from rulelist.rulelistmodel.rulesetmodel import RuleSetModel
-from rulelist.util.build.extra_maths import log2_0
+from rulelist.util.extra_maths import log2_0
 
 default_rule_statistic_categorical = {
     "discovery": CategoricalFixedStatistic,
