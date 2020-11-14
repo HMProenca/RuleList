@@ -5,6 +5,7 @@ Created on Fri Oct 18 16:13:18 2019
 @author: gathu
 """
 from time import time
+from typing import AnyStr
 
 import numpy as np
 
@@ -81,7 +82,7 @@ class RuleList():
         String of each rule consequents.
     """
 
-    def __init__(self,target_model : Literal["gaussian", "categorical"], task : Literal["prediction", "discovery"],
+    def __init__(self,target_model : AnyStr, task : AnyStr,
                  max_depth=5, beam_width = 100, min_support = 1, n_cutpoints = 5, discretization = "static",
                  max_rules = 0, alpha_gain = 1.0):
 
