@@ -6,8 +6,8 @@ with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
 setuptools.setup(
-    name='rulelist',
-    version='0.0.2',
+    name= 'rulelist',
+    version='0.0.5',
     description='Learn rule lists from data for classification, regression or subgroup discovery',
     long_description=long_description,
     long_description_content_type="text/markdown",
