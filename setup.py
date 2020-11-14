@@ -5,6 +5,7 @@ with open('README.md') as f:
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
+
 setuptools.setup(
     name='rulelist',
     version='0.0.1',
@@ -12,6 +13,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
+    install_requires= INSTALL_REQUIRES,
     url='https://github.com/HMProenca/RuleList',
     license='MIT License',
     author='Hugo Proenca',
@@ -22,6 +24,6 @@ setuptools.setup(
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.7",
     install_requires=requirements,
 )
