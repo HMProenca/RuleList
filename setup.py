@@ -17,7 +17,7 @@ setuptools.setup(
     author='Hugo Proenca',
     author_email='hugo.manuel.proenca@gmail.com',
     classifiers=[
-        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.7",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
