@@ -5,7 +5,6 @@ Created on Fri Oct 18 16:13:18 2019
 @author: gathu
 """
 from time import time
-from typing import Literal
 
 import numpy as np
 

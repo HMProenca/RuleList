@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List, Literal
+from typing import List, AnyStr
 
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
@@ -37,9 +37,9 @@ class Data:
     """
     input_data : pd.DataFrame
     n_cutpoints : int
-    discretization: Literal["static", "sequential", "dynamic"]
+    discretization: AnyStr #Literal["static", "sequential", "dynamic"]
     target_data: pd.DataFrame
-    target_model: Literal["gaussian", "single-nominal"]
+    target_model: AnyStr #Literal["gaussian", "single-nominal"]
     min_support: int
     attributes: List[Attribute] = field(default_factory=list, init=False)
     number_attributes: int = field(init=False)

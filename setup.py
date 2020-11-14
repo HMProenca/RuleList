@@ -5,7 +5,7 @@ with open('README.md') as f:
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
-setup(
+setuptools.setup(
     name='rulelist',
     version='0.0.0',
     description='Learn rule lists from data for classification, regression or subgroup discovery',

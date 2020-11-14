@@ -1,4 +1,4 @@
-name = 'rulelist'
-__author__ = 'Hugo Proenca <hugo.manuel.proenca@gmail.com>'
-__version__ = '0.0.0'
+from rulelist.rulelist import RuleList
+
+__all__ = ["RuleList"]
 
