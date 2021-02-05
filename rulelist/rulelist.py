@@ -127,7 +127,7 @@ class RuleList():
         self.task = task
         self.number_rules = 0
         self.max_rules = max_rules
-        self.rulelist = None
+        self._rulelist = None
 
     #TODO:  def __repr__
     def __str__(self):
