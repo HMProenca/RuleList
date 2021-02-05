@@ -24,7 +24,7 @@ class RuleList():
     Parameters
     ----------
     target_type : string, mandatory
-        (possible values: "single-numeric" or "nominal")
+        (possible values: "gaussian" or "nominal")
         choose the appropriate target_type (no default value) for the type of
         rule/subgroup search.
     max_depth : int, optional (default=5)
