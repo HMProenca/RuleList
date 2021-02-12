@@ -1,6 +1,6 @@
 
 
-# MDL Rule Lists for prediction and data mining
+# MDL Rule Lists for prediction and subgroup discovery.
 
 This repository contains the code for using rule lists for univariate or multivariate classification or regression and its equivalents in Data Mining and Subgroup Discovery. 
 These models use the Minimum Description Length (MDL) principle as optimality criteria.
@@ -13,7 +13,7 @@ This project was written for Python 3.7. All required packages from PyPI are spe
 *NOTE:* This list of packages includes the `gmpy2` package.
 
 
-## Example of usage:
+## Example of usage for prediction:
 
 ```python
 import pandas as pd
@@ -39,6 +39,26 @@ from sklearn.metrics import accuracy_score
 accuracy_score(y_test.values,y_pred)
 ```
 
+## Example of usage for subgroup discovery:
+
+```python
+import pandas as pd
+from rulelist.rulelist import RuleList
+from sklearn import datasets
+
+task = 'discovery'
+target_model = 'gaussian'
+
+data = datasets.load_boston()
+y = pd.Series(data.target)
+X = pd.DataFrame(data.data)
+
+model = RuleList(task = task, target_model = target_model)
+
+model.fit(X, y)
+
+print(model)
+```
 
 
 
