@@ -12,6 +12,24 @@ This project was written for Python 3.7. All required packages from PyPI are spe
 
 *NOTE:* This list of packages includes the `gmpy2` package.
 
+## Installation
+
+The latest release can be installed using pip:
+
+```bash
+pip install rulelist
+```
+
+If you run into issues regarding the `gmpy2` package mentioned above, please refer to their documentation for help.
+
+For the current version, you can clone the repository and install the dependencies locally:
+
+```bash
+git clone https://github.com/HMProenca/RuleList.git
+cd RuleList
+pip install -r requirements.txt
+```
+
 
 ## Example of usage for prediction:
 
