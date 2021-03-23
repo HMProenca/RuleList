@@ -2,6 +2,10 @@
 
 # MDL Rule Lists for prediction and subgroup discovery.
 
+[![PyPI version](https://badge.fury.io/py/rulelist.svg)](https://badge.fury.io/py/rulelist)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rulelist)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 This repository contains the code for using rule lists for univariate or multivariate classification or regression and its equivalents in Data Mining and Subgroup Discovery. 
 These models use the Minimum Description Length (MDL) principle as optimality criteria.
 
