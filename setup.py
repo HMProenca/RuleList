@@ -7,7 +7,7 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name= 'rulelist',
-    version='0.0.12',
+    version='0.1.0',
     description='Learn rule lists from data for classification, regression or subgroup discovery',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -20,7 +20,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.7",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "License :: OSI Approved",
     ],
     python_requires=">=3.7",
     install_requires=requirements,

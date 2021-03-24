@@ -39,7 +39,7 @@ pip install -r requirements.txt
 
 ```python
 import pandas as pd
-from rulelist.rulelist import RuleList
+from rulelist import RuleList
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
@@ -59,6 +59,8 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 from sklearn.metrics import accuracy_score
 accuracy_score(y_test.values,y_pred)
+
+print(model)
 ```
 
 ## Example of usage for subgroup discovery:

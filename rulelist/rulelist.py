@@ -9,7 +9,7 @@ from typing import AnyStr
 
 import numpy as np
 
-from rulelist.rulelistmodel.prediction import predict_rulelist
+from rulelist.rulelistmodel.prediction import predict_rulelist, predict_prob_rulelist
 from rulelist.search.iterative_rule_search import _fit_rulelist
 from rulelist.util.bitset_operations import bitset2indexes
 
@@ -84,7 +84,7 @@ class RuleList():
 
     def __init__(self,target_model : AnyStr, task : AnyStr,
                  max_depth=5, beam_width = 100, min_support = 1, n_cutpoints = 5, discretization = "static",
-                 max_rules = 0, alpha_gain = 1.0):
+                 max_rules = np.inf, alpha_gain = 1.0):
 
         if target_model not in ["categorical", "gaussian"]:
             raise ValueError("Target model incorrectly selected, please select either \"categorical\" or \"gaussian\".")
@@ -170,3 +170,18 @@ class RuleList():
         """
         y_hat = predict_rulelist(X, self._rulelist)
         return y_hat
+
+    def predict_proba(self,X):
+        """ Returns the probabilities of the target variables for an input data X.
+        ----------
+        X : a numpy array or pandas dataframe with the variables in the same
+            poistion (column number) as given in "fit" function.
+
+        Returns a numpy array prob_hat (univariate case) or a dictionary of numpy arrays
+        with the probabilites according to thefitted rule list (obtained using the "fit" function above). y has the
+        same length as X.shape[0] (number of rows).
+        -------
+        self : object
+        """
+        prob_hat = predict_prob_rulelist(X, self._rulelist)
+        return prob_hat

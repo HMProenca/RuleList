@@ -34,5 +34,5 @@ def greedy_and_beamsearch(data,rulelist):
         subgroup2add = find_best_rule(rulelist, data)
         if subgroup2add.score <= 0: break
         rulelist = rulelist.add_rule(subgroup2add,data)
-        if rulelist.number_rules >= rulelist.max_rules: break
+        #if rulelist.number_rules >= rulelist.max_rules: break
     return rulelist
