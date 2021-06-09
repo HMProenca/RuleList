@@ -19,7 +19,7 @@ def compute_length_model(rulelist):
     for subgroup in rulelist.subgroups:
         #l_patterns_length += rulelist.l_universal[subgroup.size]
         l_patterns_length +=  universal_code_integers(subgroup.size)
-        l_patterns_combination += rulelist.l_combination_pattern[subgroup.size]
+        l_patterns_combination += rulelist.l_variables_in_pattern[subgroup.size]
         l_items += sum([rulelist.l_attribute_item[(item.parent_variable, item.number_operators)]
                         for item in subgroup.pattern])
     l_model = l_rules + l_patterns_length + l_patterns_combination + l_items

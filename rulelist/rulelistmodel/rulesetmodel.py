@@ -2,7 +2,7 @@ from copy import deepcopy
 
 from gmpy2 import mpz, bit_mask, popcount
 
-from rulelist.mdl.mdl_base_codes import uniform_combination_code
+from rulelist.mdl.mdl_base_codes import uniform_combination_code, uniform_permutation_code
 from rulelist.rulelistmodel.data_encoding import compute_length_data
 from rulelist.rulelistmodel.model_encoding import compute_item_length, compute_length_model
 from rulelist.rulelistmodel.statistic import Statistic
@@ -63,10 +63,15 @@ class RuleSetModel():
 
     def _create_constants(self, data,max_depth):
         self.max_depth = max_depth if max_depth < data.number_attributes else data.number_attributes
-        self.l_combination_pattern = {size : uniform_combination_code(size, data.number_attributes) for size in range(1, self.max_depth + 1)}
+        if data.discretization == 'static':
+            self.l_variables_in_pattern = {size : uniform_combination_code(size, data.number_attributes)
+                                           for size in range(1, self.max_depth + 1)}
+        elif data.discretization == 'dynamic':
+            self.l_variables_in_pattern = {size : uniform_permutation_code(size, data.number_attributes)
+                                           for size in range(1, self.max_depth + 1)}
         self.l_attribute_item = {(attribute_name, n_operators) : l_item for attribute in data.attributes
                                  for attribute_name, n_operators, l_item in compute_item_length(attribute)}
-        return self.max_depth, self.l_combination_pattern, self.l_attribute_item
+        return self.max_depth, self.l_variables_in_pattern, self.l_attribute_item
 
     def _compute_length_ratio(self):
         """ In case the variance is small the length becomes negative. This is merely an artifact of scale.

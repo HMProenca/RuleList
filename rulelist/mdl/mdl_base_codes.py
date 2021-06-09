@@ -8,7 +8,7 @@ Created on Fri Nov  8 16:34:06 2019
 from functools import lru_cache
 from math import log, ceil, sqrt, log2
 
-from scipy.special import comb, gammaln
+from scipy.special import comb,perm, gammaln
 
 from rulelist.util.extra_maths import log2_0
 
@@ -83,4 +83,21 @@ def uniform_code(n: int) -> float:
     return log2(n) if n != 0 else 0
 
 def uniform_combination_code(n: int, maximum: int) -> float:
+    """ Code based on n-combination of maximum.
+    This code is used when order of the elements does not matter.
+
+    :param n:
+    :param maximum:
+    :return:
+    """
     return log2(comb(maximum, n))
+
+def uniform_permutation_code(n: int, maximum: int) -> float:
+    """ Code based on n-permutations of maximum.
+    This code is used when order of the elements matters.
+
+    :param n:
+    :param maximum:
+    :return:
+    """
+    return log2(perm(maximum, n))

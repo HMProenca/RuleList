@@ -27,7 +27,7 @@ def compute_delta_model(rulelist, new_candidate):
     #l_pattern_length = rulelist.l_universal[len(new_candidate)]
     delta_rules = universal_code_integers(rulelist.number_rules) - universal_code_integers(rulelist.number_rules + 1)
     l_pattern_length = universal_code_integers(len(new_candidate))
-    l_pattern_combination = rulelist.l_combination_pattern[len(new_candidate)]
+    l_pattern_combination = rulelist.l_variables_in_pattern[len(new_candidate)]
     l_items = sum([rulelist.l_attribute_item[(item.parent_variable, item.number_operators)]
                         for item in new_candidate])
     gain_model = delta_rules - l_pattern_length - l_pattern_combination - l_items
