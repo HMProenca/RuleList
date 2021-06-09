@@ -50,7 +50,7 @@ class Attribute:
         Minimum support of numer of instances covered by an item or pattern
     """
     name: AnyStr
-    values: pd.Series
+    values: np.ndarray
     max_operators: int
     min_support: Any # it can be an int or a float
     cardinality_operator : Dict[int, int] =field(init=False)

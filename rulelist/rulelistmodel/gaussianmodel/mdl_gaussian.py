@@ -4,6 +4,7 @@ Created on Wed Jan 15 18:09:04 2020
 
 @author: gathu
 """
+import math
 from math import pi, log2
 
 from numpy import inf
@@ -26,6 +27,7 @@ def gaussian_bayesian_encoding(n: int,variance : float,log_gamma_n: float):
     else:
         length = 1 + n/2*log2(pi) - log_gamma_n + 0.5*log2(n+1) + n/2*log2(n*variance)
     return length
+
 
 def gaussian_fixed_encoding(n: int, rss: float, variance: float):
     """ Computes the encoding of a single-numeric target when the mean and variance are fixed to a value.
@@ -64,6 +66,7 @@ def length_rule_free_gaussian(rulelist : classmethod, statistics : classmethod):
         if l_nonoptimal_2 == inf : raise Exception('l_nonoptimal_2 value is wrong')
         codelength = l_bayesian_all - l_bayesian_2 + l_nonoptimal_2
     return codelength
+
 
 def length_rule_fixed_gaussian(rulelist : classmethod, statistics : GaussianFixedStatistic):
     """ Computes alpha_gain of one rule that does not have fixed statistics.

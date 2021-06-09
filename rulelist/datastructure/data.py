@@ -13,6 +13,7 @@ from rulelist.rulelistmodel.gaussianmodel.gaussiantarget import GaussianTargets
 #TODO: add location and multivariate gaussian
 init_target = {
     "gaussian" : GaussianTargets,
+    "spread" : GaussianTargets,
     "categorical" : CategoricalTarget
 };
 
@@ -75,12 +76,12 @@ class Data:
             It returns a list of attributes already initialized.
         """
         #self.attributes = list() # clean in case it has previous values
-        #TODO: stop hardcoding max_operators and ask to the user, special for nominal!
+        #TODO: stop hardcoding max_operators and ask to the user, specially for nominal!
         for name, values in self.input_data.iteritems():
             if is_numeric_dtype(self.input_data[name]):
                 max_operators = 2
-                self.attributes.append(NumericAttribute(name, values, max_operators,self.min_support, self.n_cutpoints, self.discretization))
+                self.attributes.append(NumericAttribute(name, values.to_numpy(), max_operators,self.min_support, self.n_cutpoints, self.discretization))
             else:  # Nominal or Binary
                 max_operators = 1
-                self.attributes.append(NominalAttribute(name, values, max_operators,self.min_support))
+                self.attributes.append(NominalAttribute(name, values.to_numpy(), max_operators,self.min_support))
         return self.attributes

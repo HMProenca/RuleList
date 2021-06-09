@@ -104,8 +104,8 @@ class RuleList():
             raise ValueError("n_cutpoints incorrectly selected, please select a "
                              "positive integer greater or equal to 2.")
 
-        if discretization not in ["static"]:
-            raise ValueError("At this moment we only support \"static\" discretization.")
+        if discretization not in ["static","dynamic"]:
+            raise ValueError("At this moment we only support \"static\" or \"dynamic\" discretizations.")
 
         if not isinstance(n_cutpoints, (int, np.integer)) or max_rules < 0:
             raise ValueError("max_rules incorrectly selected, please select a "
@@ -114,8 +114,6 @@ class RuleList():
         if alpha_gain < 0 or alpha_gain > 1:
             raise ValueError("alpha_gain incorrectly selected, please select a "
                              "between zero and 1 inclusive.")
-
-
 
         self.target_model = target_model
         self.alpha_gain = alpha_gain
@@ -153,7 +151,6 @@ class RuleList():
         self.number_rules = self._rulelist.number_rules
         self.rule_sets = [bitset2indexes(bitset) for bitset in self._rulelist.bitset_rules]
         return self
-
 
 
     def predict(self,X):

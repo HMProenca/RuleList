@@ -20,12 +20,11 @@ def refine_subgroup(rulelist,data,candidate2refine,beam,subgroup2add):
     """
     bitarray_candidate = reduce((lambda x, y: x & y), (item.bitarray for item in candidate2refine)) \
         if candidate2refine != [] else bit_mask(data.number_instances)
-    #TODO: move this computation depending if it is a rule list or a rule set
     bitarray_candidate = bitarray_candidate & rulelist.bitset_uncovered
     variable_list = [item.parent_variable for item in candidate2refine]
     for attribute in filter(lambda x: x.name not in variable_list, data.attributes):
-        #for item in attribute.generate_items(candidate2refine):
-        for item in attribute.items:
+        #for item in attribute.items:
+        for item in attribute.generate_items(rulelist.bitset_uncovered & bitarray_candidate):
             bitarray_newcandidate = bitarray_candidate & item.bitarray
             usage = popcount(bitarray_newcandidate)
             if usage >= rulelist.min_support:
