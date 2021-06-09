@@ -9,7 +9,7 @@ from rulelist.rulelistmodel.statistic import Statistic
 from rulelist.util.bitset_operations import bitset2indexes
 
 
-@jit(nopython=True)
+#@jit(nopython=True)
 def compute_mean_special(column_data, indices_subgroup):
 
     sum_values = 0
@@ -17,17 +17,17 @@ def compute_mean_special(column_data, indices_subgroup):
         sum_values = sum_values + column_data[indices_subgroup[i]]
     return sum_values/len(indices_subgroup)
 
-@jit(nopython=True)
+#@jit(nopython=True)
 def compute_mean(values):
     return np.mean(values)
 
-@jit(nopython=True)
+#@jit(nopython=True)
 def compute_RSS(values, meanval):
     c = values - meanval
     RSS = np.dot(c, c)
     return RSS
 
-@jit(nopython=True)
+#@jit(nopython=True)
 def find2points(values, meandata,bigvalue):
     closest = np.array([bigvalue, bigvalue])
     #closest = values[0:2]
