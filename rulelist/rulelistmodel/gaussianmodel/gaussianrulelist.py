@@ -17,7 +17,7 @@ compute_default_length_gaussian = {
 
 
 class GaussianRuleList(RuleSetModel):
-    """ rule set model
+    """ General Gaussian rule list
 
     """
 

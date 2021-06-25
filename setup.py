@@ -7,7 +7,7 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name= 'rulelist',
-    version='0.2.0',
+    version='0.2.1',
     description='Learn rule lists from data for classification, regression or subgroup discovery',
     long_description=long_description,
     long_description_content_type="text/markdown",

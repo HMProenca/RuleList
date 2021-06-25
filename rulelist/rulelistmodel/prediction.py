@@ -2,19 +2,17 @@ from functools import reduce
 
 import numpy as np
 import pandas as pd
+from sklearn.base import is_classifier
 
 from rulelist.rulelistmodel.categoricalmodel.prediction_categorical import point_value_categorical, \
     probability_categorical
 from rulelist.rulelistmodel.gaussianmodel.prediction_gaussian import point_value_gaussian
-from rulelist.rulelistmodel.rulesetmodel import RuleSetModel
 
-point_value_estimation = {
-    "gaussian" : point_value_gaussian,
-    "categorical": point_value_categorical
-}
 
-def predict_rulelist(X : pd.DataFrame, rulelist: RuleSetModel):
+def predict_rulelist(X : pd.DataFrame, model):
     if X is not pd.DataFrame: Exception('X needs to be a DataFrame')
+    is_classification =  is_classifier(model)
+    rulelist = model._rulelist
     n_predictions = X.shape[0]
     n_targets = rulelist.default_rule_statistics.number_targets
     instances_covered = np.zeros(n_predictions, dtype=bool)
@@ -22,11 +20,19 @@ def predict_rulelist(X : pd.DataFrame, rulelist: RuleSetModel):
     for subgroup in rulelist.subgroups:
         instances_subgroup = ~instances_covered &\
                              reduce(lambda x,y: x & y, [item.activation_function(X).values for item in subgroup.pattern])
-        predictions[instances_subgroup,:] = point_value_estimation[rulelist.target_model](subgroup.statistics)
+        if is_classification:
+            predictions[instances_subgroup,:] = point_value_categorical(subgroup.statistics)
+        else:
+            predictions[instances_subgroup,:] = point_value_gaussian(subgroup.statistics)
         instances_covered |= instances_subgroup
 
     # default rule
-    predictions[~instances_covered, :] = point_value_estimation[rulelist.target_model](rulelist.default_rule_statistics)
+    if is_classification:
+        predictions[~instances_covered, :] = point_value_categorical(rulelist.default_rule_statistics)
+    else:
+        predictions[~instances_covered, :] = point_value_gaussian(rulelist.default_rule_statistics)
+
+
     if n_targets == 1:
         predictions = predictions.flatten()
 
@@ -37,7 +43,8 @@ def predict_rulelist(X : pd.DataFrame, rulelist: RuleSetModel):
         pass
     return predictions
 
-def predict_prob_rulelist(X : pd.DataFrame, rulelist: RuleSetModel):
+def predict_prob_rulelist(X : pd.DataFrame, model):
+    rulelist = model._rulelist
     if X is not pd.DataFrame: Exception('X needs to be a DataFrame')
     if rulelist.target_model != 'categorical': Exception('It needs to be a classification setting.')
 

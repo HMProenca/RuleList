@@ -18,7 +18,12 @@ This project was written for Python 3.7. All required packages from PyPI are spe
 
 ## Installation
 
-The latest release can be installed using pip:
+For the latest version clone this package as is and use it directly:
+
+```bash
+$ git clone https://github.com/HMProenca/RuleList
+```
+For the latest stable version from pip (it can be older than the current github version) please use
 
 ```bash
 pip install rulelist
@@ -39,12 +44,10 @@ pip install -r requirements.txt
 
 ```python
 import pandas as pd
-from rulelist import RuleList
+from rulelist import RuleListClassifier, RuleListRegressor
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
-task = 'prediction'
-target_model = 'categorical'
 
 data = datasets.load_breast_cancer()
 Y = pd.Series(data.target)
@@ -52,7 +55,7 @@ X = pd.DataFrame(data.data)
 
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3)
 
-model = RuleList(task = task, target_model = target_model)
+model = RuleListClassifier(discretization = "static")
 
 model.fit(X_train, y_train)
 
@@ -67,17 +70,14 @@ print(model)
 
 ```python
 import pandas as pd
-from rulelist.rulelist import RuleList
+from rulelist import SubgroupListCategorical, SubgroupListGaussian
 from sklearn import datasets
-
-task = 'discovery'
-target_model = 'gaussian'
 
 data = datasets.load_boston()
 y = pd.Series(data.target)
 X = pd.DataFrame(data.data)
 
-model = RuleList(task = task, target_model = target_model)
+model = SubgroupListGaussian()
 
 model.fit(X, y)
 
