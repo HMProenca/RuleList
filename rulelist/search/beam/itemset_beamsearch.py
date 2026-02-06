@@ -53,7 +53,8 @@ def find_best_rule(rulelist, data):
         return subgroup2add
     subgroup2add = Subgroup()
     beam = Beam(rulelist.beam_width)
-    max_search_depth = getattr(rulelist, "max_search_depth", rulelist.max_depth)  # fallback limit used when deterministic shortcut is disabled
+    # Depth limit applied when the deterministic shortcut is not used
+    max_search_depth = getattr(rulelist, "max_search_depth", rulelist.max_depth)
     for depth in range(max_search_depth):
         candidates = [pattern for ip, pattern in enumerate(beam.patterns)
                       if pattern not in beam.patterns[:ip]
