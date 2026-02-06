@@ -24,7 +24,6 @@ class GaussianRuleList(RuleSetModel):
     def __init__(self, data, task, max_depth,beam_width,min_support, max_rules, alpha_gain):
         self.max_depth, self.l_combination_pattern, self.l_attribute_item = self._create_constants(data, max_depth)
         super().__init__(data, task, max_depth,beam_width,min_support, max_rules, alpha_gain)
-        self.min_support = max(min_support,4)
 
     def init_default_statistics(self, data):
         return default_rule_statistic_gaussian[self.task](data)

@@ -77,7 +77,7 @@ class Data:
         """
         #self.attributes = list() # clean in case it has previous values
         #TODO: stop hardcoding max_operators and ask to the user, specially for nominal!
-        for name, values in self.input_data.iteritems():
+        for name, values in self.input_data.items():
             if is_numeric_dtype(self.input_data[name]):
                 max_operators = 2
                 self.attributes.append(NumericAttribute(name, values.to_numpy(), max_operators,self.min_support, self.n_cutpoints, self.discretization))

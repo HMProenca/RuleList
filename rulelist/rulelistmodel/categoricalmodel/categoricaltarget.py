@@ -37,7 +37,7 @@ class CategoricalTarget:
     prob_var_class : Dict[Any, Dict[Any, float]] = field(default_factory=dict,init=False)
     def __post_init__(self, target_values):
         self.bit_array = bit_mask(target_values.shape[0])
-        self.categories = {colname: colvals.unique() for colname, colvals in target_values.iteritems()} #ignores NANs values
+        self.categories = {colname: colvals.unique() for colname, colvals in target_values.items()} #ignores NANs values
         self.number_classes = {colname: len(array_uniques) for colname, array_uniques in self.categories.items()}
         if any([nunique == 1 for nunique in self.number_classes.values()]):
             raise ValueError("There is at least one target variable with only one class label. Please only add targets with 2 or more class labels.")
@@ -51,7 +51,7 @@ class CategoricalTarget:
         Dict[gmpy2.mpz] :
             A dictionary of the bitarray values.
         """
-        for namecol, colvals in target_values.iteritems():
+        for namecol, colvals in target_values.items():
             self.bit_arrays_var_class[namecol] = dict()
             self.counts[namecol] = dict()
             self.prob_var_class[namecol] = dict()
@@ -61,4 +61,3 @@ class CategoricalTarget:
                 self.counts[namecol][category] = len(category_indexes)
                 self.prob_var_class[namecol][category] = self.counts[namecol][category]/target_values.shape[0]
         return self.bit_arrays_var_class, self.counts, self.prob_var_class
-

@@ -17,11 +17,11 @@ setuptools.setup(
     author='Hugo Proenca',
     author_email='hugo.manuel.proenca@gmail.com',
     classifiers=[
-        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.14",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
         "License :: OSI Approved",
     ],
-    python_requires=">=3.7",
+    python_requires=">=3.14",
     install_requires=requirements,
 )

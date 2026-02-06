@@ -56,7 +56,8 @@ class NominalAttribute(Attribute):  # TODO: add sets of categories with OR logic
     categories : np.ndarray = field(default_factory=list, init=False)
     cardinality_operator : Dict[int,int] =field(init=False)
     def __post_init__(self):
-        self.categories = self.values.unique()
+        # preserve original category order as in the data
+        self.categories = pd.unique(self.values)
         self.items, self.cardinality_operator =  self.create_items()
 
     #TODO: expand make items simple nominal to sets of items with the logical OR
@@ -80,5 +81,3 @@ class NominalAttribute(Attribute):  # TODO: add sets of categories with OR logic
             activation_function = partial(activation_nominal, attribute_name=self.name, category=category)
             self.items.append(Item(bit_array,self.name, description, number_operators,activation_function))
         return self.items, self.cardinality_operator
-
-

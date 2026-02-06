@@ -2,7 +2,13 @@ from dataclasses import dataclass, field, InitVar
 from typing import List
 
 import numpy as np
-from numba import jit
+try:
+    from numba import jit
+except ModuleNotFoundError:  # pragma: no cover - optional acceleration
+    def jit(*args, **kwargs):
+        def decorator(func):
+            return func
+        return decorator
 
 from rulelist.datastructure.data import Data
 from rulelist.rulelistmodel.statistic import Statistic

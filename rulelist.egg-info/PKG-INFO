@@ -1,3 +1,19 @@
+Metadata-Version: 2.1
+Name: rulelist
+Version: 0.2.1
+Summary: Learn rule lists from data for classification, regression or subgroup discovery
+Home-page: https://github.com/HMProenca/RuleList
+Author: Hugo Proenca
+Author-email: hugo.manuel.proenca@gmail.com
+License: MIT License
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 
 
 # MDL Rule Lists for prediction and subgroup discovery.
@@ -12,7 +28,7 @@ These models use the Minimum Description Length (MDL) principle as optimality cr
 
 ## Dependencies
 
-This project targets Python 3.14. All required packages from PyPI are specified in the `requirements.txt`.
+This project targets Python 3.12. All required packages from PyPI are specified in the `requirements.txt`.
 
 *NOTE:* This list of packages includes the `gmpy2` package.
 
