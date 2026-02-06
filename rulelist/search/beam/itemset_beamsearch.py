@@ -52,7 +52,8 @@ def find_best_rule(rulelist, data):
         return subgroup2add
     subgroup2add = Subgroup()
     beam = Beam(rulelist.beam_width)
-    for depth in range(1):  # limit to single-item patterns for deterministic selection
+    max_search_depth = 1  # limit to single-item patterns for deterministic selection
+    for depth in range(max_search_depth):
         candidates = [pattern for ip, pattern in enumerate(beam.patterns)
                       if pattern not in beam.patterns[:ip]
                       and len(pattern) == depth
