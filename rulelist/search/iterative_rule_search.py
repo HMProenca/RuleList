@@ -26,7 +26,8 @@ def _fit_rulelist(input_data, target_data, target_model, max_depth, beam_width, 
     """
     Fit a rule list using the same parameters as the legacy iterative search routine.
 
-    Parameters mirror the original public API and are kept for backward compatibility with tests.
+    Parameters mirror the original public API and are kept for backward compatibility; the
+    iterative_beam_width argument is accepted but not used.
     """
     data = Data(input_data=input_data, n_cutpoints=n_cutpoints, discretization=discretization,
                 target_data=target_data, target_model=target_model, min_support=min_support)

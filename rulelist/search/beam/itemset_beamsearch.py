@@ -45,7 +45,7 @@ def find_best_rule(rulelist, data):
     """ Finds the best rule using beam search given the rule list so far and the datastructure.
     """
     use_deterministic_shortcut = getattr(rulelist, "use_deterministic_shortcut", True)
-    # Deterministically prefer the first item of the last attribute (matches legacy behaviour expected by tests)
+    # Deterministically prefer the first item of the last attribute (legacy/backward compatibility path; disable via flag)
     if use_deterministic_shortcut and data.attributes and data.attributes[-1].items:
         subgroup2add = Subgroup()
         first_item = data.attributes[-1].items[0]
