@@ -2,6 +2,12 @@
 """
 Created on Fri Nov  8 16:09:11 2019
 
+Deterministic search controls:
+- rulelist.use_deterministic_shortcut: when True (default), prefer the first item of the
+  last attribute without performing beam search (backward compatibility).
+- rulelist.max_search_depth: optional override for search depth when the deterministic
+  shortcut is disabled; defaults to rulelist.max_depth.
+
 @author: gathu
 """
 from functools import reduce

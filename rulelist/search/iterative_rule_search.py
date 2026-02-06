@@ -28,6 +28,33 @@ def _fit_rulelist(input_data, target_data, target_model, max_depth, beam_width, 
 
     Parameters mirror the original public API and are kept for backward compatibility; the
     iterative_beam_width argument is accepted but not used.
+
+    Parameters
+    ----------
+    input_data : pandas.DataFrame
+        Descriptive variables.
+    target_data : pandas.DataFrame
+        Target variables.
+    target_model : str
+        Type of target model (e.g., "gaussian", "categorical").
+    max_depth : int
+        Maximum search depth.
+    beam_width : int
+        Beam width for search.
+    iterative_beam_width : int
+        Legacy parameter accepted for compatibility (unused).
+    n_cutpoints : int
+        Number of discretization cutpoints.
+    task : str
+        Task type (e.g., "discovery", "prediction").
+    discretization : str
+        Discretization strategy ("static" or "dynamic").
+    max_rules : int
+        Maximum number of rules.
+    alpha_gain : float
+        Gain trade-off parameter.
+    min_support : int or float, optional
+        Minimum support count or ratio, defaults to 1.
     """
     data = Data(input_data=input_data, n_cutpoints=n_cutpoints, discretization=discretization,
                 target_data=target_data, target_model=target_model, min_support=min_support)
