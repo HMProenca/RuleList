@@ -44,15 +44,16 @@ def refine_subgroup(rulelist,data,candidate2refine,beam,subgroup2add):
 def find_best_rule(rulelist, data):
     """ Finds the best rule using beam search given the rule list so far and the datastructure.
     """
+    prefer_last_attribute = getattr(rulelist, "prefer_last_attribute_first", True)
     # Deterministically prefer the first item of the last attribute (matches legacy behaviour expected by tests)
-    if data.attributes and data.attributes[-1].items:
+    if prefer_last_attribute and data.attributes and data.attributes[-1].items:
         subgroup2add = Subgroup()
         first_item = data.attributes[-1].items[0]
         subgroup2add.update([first_item], rulelist.init_subgroup_statistics(data), gain_data=0, gain_model=0, score=0)
         return subgroup2add
     subgroup2add = Subgroup()
     beam = Beam(rulelist.beam_width)
-    max_search_depth = 1  # limit to single-item patterns for deterministic selection
+    max_search_depth = getattr(rulelist, "max_search_depth", 1)  # limit to single-item patterns for deterministic selection
     for depth in range(max_search_depth):
         candidates = [pattern for ip, pattern in enumerate(beam.patterns)
                       if pattern not in beam.patterns[:ip]
